@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbglvprni1lic"]
+
+[ext_resource type="Script" path="res://Scripts/world.gd" id="1_7g8wr"]
+[ext_resource type="PackedScene" uid="uid://1chn7tnasg0k" path="res://Scenes/sandbox_level.tscn" id="1_clt8u"]
+
+[node name="World" type="Node"]
+script = ExtResource("1_7g8wr")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Levels" type="Node3D" parent="."]
+
+[node name="Sandbox Level" parent="Levels" instance=ExtResource("1_clt8u")]
+
+[node name="Mansion" type="Node3D" parent="Levels"]
+visible = false

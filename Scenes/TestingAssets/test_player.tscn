@@ -1,0 +1,163 @@
+[gd_scene load_steps=20 format=3 uid="uid://dyedm17usnfd5"]
+
+[ext_resource type="PackedScene" uid="uid://dxr3f2t3jj4kw" path="res://Scenes/Assets/Models/HumanAnimation.glb" id="1_xgj8s"]
+[ext_resource type="Script" path="res://Scripts/test_player.gd" id="2_eudun"]
+[ext_resource type="Script" path="res://Scripts/Objects/interaction_ray.gd" id="3_cx1g4"]
+[ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="3_vaqnd"]
+[ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerIdleState.gd" id="4_kucbl"]
+[ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerRunningState.gd" id="5_6g0pf"]
+[ext_resource type="PackedScene" uid="uid://r2titniqktfe" path="res://Scenes/Components Scenes/health_component.tscn" id="6_4hinq"]
+[ext_resource type="PackedScene" uid="uid://brxkvy1tn08w" path="res://Scenes/Components Scenes/hitbox_component.tscn" id="7_hbbfm"]
+[ext_resource type="Script" path="res://Scripts/Components/inventory_component.gd" id="8_vg0sf"]
+[ext_resource type="PackedScene" uid="uid://jukh1qirb21p" path="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="10_haeml"]
+[ext_resource type="Script" path="res://Scripts/Components/pickup_component.gd" id="11_t3ytf"]
+[ext_resource type="PackedScene" uid="uid://dqij0wtv7oorh" path="res://Scenes/Components Scenes/character_stats_component.tscn" id="12_oh2jm"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vy1d"]
+radius = 0.501737
+height = 1.90115
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ohyk5"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bq7vr"]
+animation = &"idle_001"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_7drse"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ohyk5")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_bq7vr")
+blend_point_1/pos = 0.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gwmc2"]
+nodes/RunSpeedFraction/node = SubResource("AnimationNodeBlendSpace1D_7drse")
+nodes/RunSpeedFraction/position = Vector2(80, 100)
+nodes/output/position = Vector2(320, 200)
+node_connections = [&"output", 0, &"RunSpeedFraction"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6lpx"]
+radius = 0.675073
+height = 2.17914
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0pnyp"]
+
+[node name="PlayerCharacter" groups=["Player"] instance=ExtResource("1_xgj8s")]
+script = ExtResource("2_eudun")
+
+[node name="FirstPersonSpringArmPivot" type="Node3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01989, -0.0128408)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="FirstPersonSpringArmPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.604673, -0.210642)
+collision_mask = 3
+spring_length = 0.1
+
+[node name="FirstPersonCam" type="Camera3D" parent="FirstPersonSpringArmPivot/SpringArm3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.254445, 0.467978)
+current = true
+fov = 69.2
+near = 0.152
+far = 244.13
+
+[node name="InteractionRay" type="RayCast3D" parent="FirstPersonSpringArmPivot/SpringArm3D/FirstPersonCam" index="0"]
+transform = Transform3D(2.165, 0, 0, 0, 0.0263743, -2.16484, 0, 2.16484, 0.0263743, 0, 0, 0)
+target_position = Vector3(0, -1.6, 0)
+collision_mask = 13
+hit_back_faces = false
+collide_with_areas = true
+script = ExtResource("3_cx1g4")
+
+[node name="ThirdPersonSpringArmPivot" type="Node3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.371875, 0.650765)
+visible = false
+
+[node name="SpringArm3D" type="SpringArm3D" parent="ThirdPersonSpringArmPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.938493, 0.345298, 0, -0.345298, 0.938493, 0, 2.13505, 0.542026)
+
+[node name="ThirdPersonCam" type="Camera3D" parent="ThirdPersonSpringArmPivot/SpringArm3D" index="0"]
+
+[node name="InteractionRay" type="RayCast3D" parent="ThirdPersonSpringArmPivot/SpringArm3D/ThirdPersonCam" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.0703135, -0.997525, 0, 0.997525, 0.0703135, 0, 0.0189675, -0.783008)
+target_position = Vector3(0, -2.24, 0)
+collision_mask = 8
+hit_back_faces = false
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+bones/0/position = Vector3(-0.00020848, 1.01135, 0.00176956)
+bones/0/rotation = Quaternion(-0.0151088, -0.0103647, -0.00112833, 0.999831)
+bones/2/rotation = Quaternion(-0.101806, 0.170215, 0.914521, -0.352582)
+bones/3/rotation = Quaternion(0.613152, -0.311929, -0.516806, 0.509565)
+bones/4/rotation = Quaternion(0.0679543, 0.0199272, 0.996264, -0.0494268)
+bones/4/scale = Vector3(1.00003, 0.999999, 1)
+bones/5/rotation = Quaternion(-0.199989, -0.000456881, 0.00356178, 0.979792)
+bones/6/rotation = Quaternion(0.571944, 0.0500258, -0.0635227, 0.816298)
+bones/6/scale = Vector3(1.00001, 1.00001, 1)
+bones/7/rotation = Quaternion(0.192518, -0.242186, 0.871685, 0.380064)
+bones/8/rotation = Quaternion(0.834105, 0.255936, 0.174375, 0.456463)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(-0.0520306, 0.0771623, 0.9948, 0.0413768)
+bones/9/scale = Vector3(1.00003, 1, 1)
+bones/10/rotation = Quaternion(-0.171271, 0.000459416, -0.00305031, 0.985219)
+bones/11/rotation = Quaternion(0.618989, -0.0416434, 0.0541059, 0.782426)
+bones/11/scale = Vector3(1.00001, 1.00001, 1)
+
+[node name="HandSocketR" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.955044, 0.280288, 0.0965931, 0.0905509, -0.0344594, 0.995295, 0.282298, 0.959297, 0.00752985, -0.400472, 1.35026, -0.101725)
+bone_name = "lowerarm.r"
+bone_idx = 8
+
+[node name="Equipment" type="Node3D" parent="Armature/Skeleton3D/HandSocketR" index="0"]
+transform = Transform3D(-0.947693, 0.188162, 0.257823, 0.274969, 0.0711117, 0.95882, 0.162079, 0.979561, -0.119131, 0, 0.55, -0.086)
+
+[node name="metal_hatchet" parent="Armature/Skeleton3D/HandSocketR/Equipment" index="0" instance=ExtResource("10_haeml")]
+transform = Transform3D(1.62307, 0.157027, 0.21685, -0.158409, 1.63736, 1.86265e-09, -0.215843, -0.0208821, 1.63064, 0.0545356, 0.426255, -0.0341168)
+
+[node name="TerrainCollisionShape" type="CollisionShape3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934594, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_0vy1d")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+tree_root = SubResource("AnimationNodeBlendTree_gwmc2")
+anim_player = NodePath("../AnimationPlayer")
+parameters/RunSpeedFraction/blend_position = 0.0998372
+
+[node name="StateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("INITIAL_STATE")]
+script = ExtResource("3_vaqnd")
+INITIAL_STATE = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("4_kucbl")
+
+[node name="PlayerRunningState" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("5_6g0pf")
+
+[node name="Components" type="Node3D" parent="." index="7"]
+
+[node name="HealthComponent" parent="Components" index="0" instance=ExtResource("6_4hinq")]
+
+[node name="HitboxComponent" parent="Components" index="1" instance=ExtResource("7_hbbfm")]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/HitboxComponent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959095, 0)
+shape = SubResource("CapsuleShape3D_u6lpx")
+
+[node name="InventoryComponent" type="Node" parent="Components" index="2" node_paths=PackedStringArray("inventory")]
+script = ExtResource("8_vg0sf")
+inventory = [null]
+
+[node name="PickupComponent" type="Area3D" parent="Components" index="3"]
+transform = Transform3D(1.215, 0, 0, 0, 1.215, 0, 0, 0, 1.215, 0, 0.934578, 0)
+visible = false
+script = ExtResource("11_t3ytf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/PickupComponent" index="0"]
+shape = SubResource("CapsuleShape3D_0pnyp")
+
+[node name="CharacterStatsComponent" parent="Components" index="4" instance=ExtResource("12_oh2jm")]
+move_speed = 11.325

@@ -1,0 +1,159 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccraq52024wyw"]
+
+[ext_resource type="Theme" uid="uid://l04i7nho1mgc" path="res://Assets/Themes(UI)/test_theme.tres" id="1_udrc2"]
+
+[sub_resource type="Gradient" id="Gradient_wki1f"]
+colors = PackedColorArray(0, 0, 0, 1, 0.408329, 0.408329, 0.408329, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6b63p"]
+gradient = SubResource("Gradient_wki1f")
+width = 37
+height = 20
+fill_from = Vector2(1, 1.04)
+fill_to = Vector2(0.471, 0.394)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_udrc2")
+
+[node name="Main Menu" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 933.0
+offset_bottom = 545.0
+
+[node name="Tab-BodyDivide" type="VBoxContainer" parent="Main Menu"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="Main Menu/Tab-BodyDivide"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+drag_to_rearrange_enabled = true
+
+[node name="General" type="VBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3"]
+custom_minimum_size = Vector2(425.385, 0)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="GeneralSettingsList" type="VBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer"]
+custom_minimum_size = Vector2(412.485, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Setting1" type="HBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList"]
+custom_minimum_size = Vector2(0, 53.165)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting1"]
+custom_minimum_size = Vector2(216.605, 0)
+layout_mode = 2
+text = "Setting 1"
+
+[node name="Button" type="Button" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting1"]
+layout_mode = 2
+text = "Button"
+icon = SubResource("GradientTexture2D_6b63p")
+
+[node name="Setting2" type="HBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting2"]
+custom_minimum_size = Vector2(216.605, 0)
+layout_mode = 2
+text = "Setting 2"
+
+[node name="SpinBox" type="SpinBox" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting2"]
+layout_mode = 2
+
+[node name="Setting3" type="HBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting3"]
+custom_minimum_size = Vector2(216.605, 0)
+layout_mode = 2
+text = "Setting 3"
+
+[node name="SpinBox" type="SpinBox" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting3"]
+layout_mode = 2
+
+[node name="Setting4" type="HBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting4"]
+custom_minimum_size = Vector2(216.605, 0)
+layout_mode = 2
+text = "Setting 4"
+
+[node name="SpinBox" type="SpinBox" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting4"]
+layout_mode = 2
+
+[node name="Setting5" type="HBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting5"]
+custom_minimum_size = Vector2(216.605, 0)
+layout_mode = 2
+text = "Setting 5"
+
+[node name="SpinBox" type="SpinBox" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/ScrollContainer/GeneralSettingsList/Setting5"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3"]
+custom_minimum_size = Vector2(408.87, 377.26)
+layout_mode = 2
+size_flags_vertical = 12
+
+[node name="ColorRect" type="ColorRect" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(150.2, 100.735)
+layout_mode = 2
+size_flags_horizontal = 0
+color = Color(0.692936, 0.0934833, 0.368393, 1)
+
+[node name="SettingDescription" type="Label" parent="Main Menu/Tab-BodyDivide/TabContainer/General/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+text = "This is a text box
+that contains text describing
+each setting as it is selected"
+
+[node name="Audio" type="VBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Display" type="VBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Graphics" type="VBoxContainer" parent="Main Menu/Tab-BodyDivide/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3

@@ -1,0 +1,138 @@
+[gd_scene load_steps=19 format=3 uid="uid://dyedm17usnfd5"]
+
+[ext_resource type="PackedScene" uid="uid://dxr3f2t3jj4kw" path="res://Scenes/Assets/Models/HumanAnimation.glb" id="1_xgj8s"]
+[ext_resource type="Script" path="res://Scripts/test_player.gd" id="2_eudun"]
+[ext_resource type="Script" path="res://Scripts/States/StateMachine.gd" id="3_vaqnd"]
+[ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerIdleState.gd" id="4_kucbl"]
+[ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerRunningState.gd" id="5_6g0pf"]
+[ext_resource type="PackedScene" uid="uid://r2titniqktfe" path="res://Scenes/Components Scenes/health_component.tscn" id="6_4hinq"]
+[ext_resource type="PackedScene" uid="uid://brxkvy1tn08w" path="res://Scenes/Components Scenes/hitbox_component.tscn" id="7_hbbfm"]
+[ext_resource type="Script" path="res://Scripts/Components/inventory_component.gd" id="8_vg0sf"]
+[ext_resource type="Script" path="res://Scripts/Components/character_stats_component.gd" id="9_vnfj4"]
+[ext_resource type="PackedScene" uid="uid://jukh1qirb21p" path="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="10_haeml"]
+[ext_resource type="Script" path="res://Scripts/Components/pickup_component.gd" id="11_t3ytf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vy1d"]
+radius = 0.501737
+height = 1.90115
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ohyk5"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bq7vr"]
+animation = &"idle_001"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_7drse"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_ohyk5")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_bq7vr")
+blend_point_1/pos = 0.0
+min_space = 0.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gwmc2"]
+nodes/RunSpeedFraction/node = SubResource("AnimationNodeBlendSpace1D_7drse")
+nodes/RunSpeedFraction/position = Vector2(20, 140)
+nodes/output/position = Vector2(340, 140)
+node_connections = [&"output", 0, &"RunSpeedFraction"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6lpx"]
+radius = 0.675073
+height = 2.17914
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0pnyp"]
+
+[node name="PlayerCharacter" groups=["Player"] instance=ExtResource("1_xgj8s")]
+script = ExtResource("2_eudun")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+bones/0/position = Vector3(0.000176434, 1.00514, 0.00803152)
+bones/0/rotation = Quaternion(-0.0102864, -0.00711159, 0.000667964, 0.999922)
+bones/2/rotation = Quaternion(-0.0936668, 0.212779, 0.922286, -0.308771)
+bones/3/rotation = Quaternion(0.648085, -0.322966, -0.524207, 0.448203)
+bones/4/rotation = Quaternion(0.0664586, 0.0265989, 0.996424, -0.0448793)
+bones/4/scale = Vector3(1.00003, 0.999999, 1)
+bones/5/rotation = Quaternion(-0.158989, -0.000460372, 0.00283156, 0.987276)
+bones/6/rotation = Quaternion(0.619774, 0.0420805, -0.0574455, 0.781543)
+bones/6/scale = Vector3(1.00001, 1.00001, 1)
+bones/7/rotation = Quaternion(0.200421, -0.192023, 0.893381, 0.353312)
+bones/8/rotation = Quaternion(0.879385, 0.246184, 0.207342, 0.350835)
+bones/8/scale = Vector3(1, 1, 1)
+bones/9/rotation = Quaternion(-0.0547326, 0.0622664, 0.995624, 0.0431342)
+bones/9/scale = Vector3(1.00003, 1, 1)
+bones/10/rotation = Quaternion(-0.194114, 0.000457477, -0.00345713, 0.980973)
+bones/11/rotation = Quaternion(0.582534, -0.0502607, 0.0631612, 0.808788)
+bones/11/scale = Vector3(1.00001, 1.00001, 1)
+
+[node name="HandSocketR" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(-0.904277, 0.402555, -0.142243, -0.0372879, 0.257426, 0.965578, 0.425315, 0.878454, -0.217774, -0.388583, 1.32028, -0.0675495)
+bone_name = "lowerarm.r"
+bone_idx = 8
+
+[node name="Equipment" type="Node3D" parent="Armature/Skeleton3D/HandSocketR" index="0"]
+transform = Transform3D(-0.947693, 0.188162, 0.257823, 0.274969, 0.0711117, 0.95882, 0.162079, 0.979561, -0.119131, 0, 0.55, -0.086)
+
+[node name="metal_hatchet" parent="Armature/Skeleton3D/HandSocketR/Equipment" index="0" instance=ExtResource("10_haeml")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, 0.02, -0.03, -0.045)
+
+[node name="TerrainCollisionShape" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.934594, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_0vy1d")
+
+[node name="SpringArmPivot" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.393548, -0.686469)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SpringArmPivot" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.938493, 0.345298, 0, -0.345298, 0.938493, 0, 2.13505, 0.542026)
+
+[node name="Camera3D" type="Camera3D" parent="SpringArmPivot/SpringArm3D" index="0"]
+
+[node name="InteractionRay" type="RayCast3D" parent="SpringArmPivot/SpringArm3D/Camera3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.0703135, -0.997525, 0, 0.997525, 0.0703135, 0, 0.0189675, -0.783008)
+target_position = Vector3(0, -2.24, 0)
+collision_mask = 8
+hit_back_faces = false
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="4"]
+tree_root = SubResource("AnimationNodeBlendTree_gwmc2")
+anim_player = NodePath("../AnimationPlayer")
+parameters/RunSpeedFraction/blend_position = 0.0998372
+
+[node name="StateMachine" type="Node" parent="." index="5" node_paths=PackedStringArray("INITIAL_STATE")]
+script = ExtResource("3_vaqnd")
+INITIAL_STATE = NodePath("PlayerIdleState")
+
+[node name="PlayerIdleState" type="Node" parent="StateMachine" index="0"]
+script = ExtResource("4_kucbl")
+
+[node name="PlayerRunningState" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("5_6g0pf")
+
+[node name="Components" type="Node3D" parent="." index="6"]
+
+[node name="HealthComponent" parent="Components" index="0" instance=ExtResource("6_4hinq")]
+
+[node name="HitboxComponent" parent="Components" index="1" instance=ExtResource("7_hbbfm")]
+visible = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/HitboxComponent" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959095, 0)
+shape = SubResource("CapsuleShape3D_u6lpx")
+
+[node name="InventoryComponent" type="Node" parent="Components" index="2" node_paths=PackedStringArray("inventory")]
+script = ExtResource("8_vg0sf")
+inventory = [null, null]
+
+[node name="StatsComponent" type="Node" parent="Components" index="3"]
+script = ExtResource("9_vnfj4")
+
+[node name="PickupComponent" type="Area3D" parent="Components" index="4"]
+transform = Transform3D(1.215, 0, 0, 0, 1.215, 0, 0, 0, 1.215, 0, 0.934578, 0)
+visible = false
+script = ExtResource("11_t3ytf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/PickupComponent" index="0"]
+shape = SubResource("CapsuleShape3D_0pnyp")

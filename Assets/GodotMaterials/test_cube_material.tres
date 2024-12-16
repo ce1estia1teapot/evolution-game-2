@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c8ns6w80p6v4g"]
+
+[ext_resource type="Texture2D" uid="uid://bfcn6gts1mrld" path="res://Assets/Textures/CheckerboardTexture.png" id="1_c4tlk"]
+
+[resource]
+albedo_color = Color(0.544974, 0.544974, 0.544974, 1)
+albedo_texture = ExtResource("1_c4tlk")
+roughness = 0.34
+uv1_offset = Vector3(0.925, 0, 0)

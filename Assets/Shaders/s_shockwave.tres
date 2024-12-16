@@ -1,0 +1,99 @@
+[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://dqc8cdbrnnu4t"]
+
+[ext_resource type="Texture2D" uid="uid://cbvh7bqsbk7vs" path="res://Assets/Textures/NoiseTextures/T_VFX_Noise_44xainv.png" id="1_lth7c"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_ycufj"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+linked_parent_graph_frame = 17
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_e8xlf"]
+output_port_for_preview = 0
+expanded_output_ports = [0]
+linked_parent_graph_frame = 17
+texture = ExtResource("1_lth7c")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeSmoothStep" id="VisualShaderNodeSmoothStep_bcm43"]
+output_port_for_preview = 0
+default_input_values = [0, 0.15, 1, 1.0, 2, 0.5]
+linked_parent_graph_frame = 17
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_nss7p"]
+linked_parent_graph_frame = 17
+operator = 2
+
+[sub_resource type="VisualShaderNodeProximityFade" id="VisualShaderNodeProximityFade_pv3pc"]
+linked_parent_graph_frame = 17
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_2mujs"]
+parameter_name = "shockwave_color"
+default_value_enabled = true
+default_value = Color(0.428932, 0.365991, 0.300144, 1)
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 shockwave_color : source_color = vec4(0.428932, 0.365991, 0.300144, 1.000000);
+uniform sampler2D tex_frg_19 : source_color;
+uniform sampler2D depth_tex_frg_22 : hint_depth_texture;
+
+
+
+void fragment() {
+// ColorParameter:23
+	vec4 n_out23p0 = shockwave_color;
+
+
+// Input:18
+	vec4 n_out18p0 = COLOR;
+	float n_out18p4 = n_out18p0.a;
+
+
+// Texture2D:19
+	vec4 n_out19p0 = texture(tex_frg_19, UV);
+	float n_out19p1 = n_out19p0.r;
+
+
+// SmoothStep:20
+	float n_in20p1 = 1.00000;
+	float n_out20p0 = smoothstep(n_out18p4, n_in20p1, n_out19p1);
+
+
+	float n_out22p0;
+// ProximityFade:22
+	float n_in22p0 = 1.00000;
+	{
+		float __depth_tex = texture(depth_tex_frg_22, SCREEN_UV).r;
+		vec4 __depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __depth_tex, 1.0);
+		__depth_world_pos.xyz /= __depth_world_pos.w;
+		n_out22p0 = clamp(1.0 - smoothstep(__depth_world_pos.z + n_in22p0, __depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+	}
+
+
+// FloatOp:21
+	float n_out21p0 = n_out20p0 * n_out22p0;
+
+
+// Output:0
+	ALBEDO = vec3(n_out23p0.xyz);
+	ALPHA = n_out21p0;
+
+
+}
+"
+nodes/fragment/18/node = SubResource("VisualShaderNodeInput_ycufj")
+nodes/fragment/18/position = Vector2(-700, 140)
+nodes/fragment/19/node = SubResource("VisualShaderNodeTexture_e8xlf")
+nodes/fragment/19/position = Vector2(-660, 520)
+nodes/fragment/20/node = SubResource("VisualShaderNodeSmoothStep_bcm43")
+nodes/fragment/20/position = Vector2(-240, 320)
+nodes/fragment/21/node = SubResource("VisualShaderNodeFloatOp_nss7p")
+nodes/fragment/21/position = Vector2(0, 480)
+nodes/fragment/22/node = SubResource("VisualShaderNodeProximityFade_pv3pc")
+nodes/fragment/22/position = Vector2(-260, 780)
+nodes/fragment/23/node = SubResource("VisualShaderNodeColorParameter_2mujs")
+nodes/fragment/23/position = Vector2(-720, -80)
+nodes/fragment/connections = PackedInt32Array(19, 1, 20, 2, 18, 4, 20, 0, 20, 0, 21, 0, 22, 0, 21, 1, 21, 0, 0, 1, 23, 0, 0, 0)
