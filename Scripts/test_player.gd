@@ -27,7 +27,6 @@ class_name PlayerController
 @export_group("Character")
 @export var SPEED = 5.0
 @export var ACCELERATION = 0.15
-@export var STATES: Array[Enums.PlayerStates] = []
 
 @export_category("Interaction")
 @export var interaction_range: float = 3.0
@@ -122,10 +121,7 @@ func _physics_process(delta: float) -> void:
 func handle_input_event(p_event: InputEvent):
 	if p_event.is_action_pressed("primary_action"):
 		# 1. Do nothing if player is in menus
-		# 2. 
-		
-		if Enums.PlayerStates.IN_MENUS in STATES:
-			return
+		pass
 		
 		# Spawn explosion at cursor on click
 
