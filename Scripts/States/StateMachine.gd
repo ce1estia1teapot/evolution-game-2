@@ -1,5 +1,9 @@
 extends Node
 class_name StateMachine
+"""
+This class is meant to handle generic state transition functionality.
+It listens for transition signals from child states and facilitates safe transition to desired states.
+"""
 
 @export var INITIAL_STATE: BaseState
 
@@ -26,9 +30,9 @@ func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.physics_update(delta)
 
-func on_child_transitioned(calling_state: BaseState, new_state_name: String) -> void:
+func on_child_transitioned(originating_state: BaseState, new_state_name: String) -> void:
 	# Ensure that calling state is the current state attempting to transition...
-	if calling_state != current_state:
+	if originating_state != current_state:
 		return
 	
 	var new_state: BaseState = states.get(new_state_name.to_lower())

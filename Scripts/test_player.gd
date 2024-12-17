@@ -1,5 +1,5 @@
 extends Character
-class_name PlayerController
+class_name TestPlayerController
 
 """ Child Nodes """
 @onready var armature: Node3D = $Armature
@@ -147,3 +147,20 @@ func on_items_grabbed(grabber: PickupComponent, grabbed_item: Item, grabbed_quan
 	"""
 	var pickup_variables = {"name": grabbed_item.item_name, "quantity": grabbed_quant}
 	print("Picked up {quantity}x {name}!".format(pickup_variables))
+
+
+""" ==== Component Getters ==== """
+func get_health_component():
+	if health_component:
+		return health_component
+
+func get_inventory_component():
+	if inventory_component:
+		return inventory_component
+
+func get_character_stats_component():
+	pass
+
+func get_hitbox_component():
+	if hitbox_component:
+		return hitbox_component

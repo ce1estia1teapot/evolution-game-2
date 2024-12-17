@@ -1,16 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbglvprni1lic"]
+[gd_scene load_steps=7 format=3 uid="uid://cbglvprni1lic"]
 
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_7g8wr"]
 [ext_resource type="PackedScene" uid="uid://1chn7tnasg0k" path="res://Scenes/sandbox_level.tscn" id="1_clt8u"]
+[ext_resource type="Script" path="res://Scripts/States/MenuManager.gd" id="2_2j3ck"]
+[ext_resource type="Script" path="res://Scripts/States/MenuStates/pause_menu.gd" id="3_ku2x7"]
+[ext_resource type="Script" path="res://Scripts/States/MenuStates/title_menu.gd" id="4_k72s6"]
+[ext_resource type="Script" path="res://Scripts/States/MenuStates/player_menu.gd" id="5_08gpv"]
 
 [node name="World" type="Node"]
 script = ExtResource("1_7g8wr")
 
-[node name="Control" type="Control" parent="."]
+[node name="MenuManager" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("2_2j3ck")
+
+[node name="PauseMenu" type="Control" parent="MenuManager"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_ku2x7")
+
+[node name="PlayerMenu" type="Control" parent="MenuManager"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_08gpv")
+
+[node name="TitleMenu" type="Control" parent="MenuManager"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_k72s6")
 
 [node name="Levels" type="Node3D" parent="."]
 
