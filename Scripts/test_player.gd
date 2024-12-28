@@ -2,10 +2,11 @@ extends Character
 class_name TestPlayerController
 
 """ Child Nodes """
+#region Child Nodes
 @onready var armature: Node3D = $Armature
 @onready var hatchet: MetalHatchet = $Armature/Skeleton3D/HandSocketR/Equipment/metal_hatchet
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var state_machine: StateMachine = $StateMachine
+@onready var state_machine: PlayerStateMachine = $PlayerStateMachine
 
 @onready var health_component: HealthComponent = $Components/HealthComponent
 @onready var hitbox_component: HitboxComponent = $Components/HitboxComponent
@@ -15,9 +16,11 @@ class_name TestPlayerController
 
 @onready var spring_arm_pivot: Node3D = $FirstPersonSpringArmPivot
 @onready var spring_arm: SpringArm3D = $FirstPersonSpringArmPivot/SpringArm3D
-@onready var interaction_ray: RayCast3D = $FirstPersonSpringArmPivot/SpringArm3D/FirstPersonCam/InteractionRay
+@onready var interaction_ray: InteractionRay = $FirstPersonSpringArmPivot/SpringArm3D/FirstPersonCam/InteractionRay
+#endregion
 
 """ === EXPORTS === """
+#region Export Variables
 # Movement
 @export_category("Movement")
 @export_group("Camera")
@@ -30,16 +33,24 @@ class_name TestPlayerController
 
 @export_category("Interaction")
 @export var interaction_range: float = 3.0
+#endregion
 
 """ ==== STATE VARIABLES ==== """
 @onready var m_current_state := state_machine.current_state
 var m_mouse_mode := Input.mouse_mode
+var m_current_interact_target
 
 """ ==== SETTINGS ==== """
 const DEFAULT_MOUSE_MODE = Input.MouseMode.MOUSE_MODE_CAPTURED
 
-""" ==== MISC. ==== """
+""" ==== Pre-loads. ==== """
 var m_explosion = preload("res://Scenes/Assets/a_explosion.tscn")
+
+""" ==== MISC. ==== """
+
+
+""" ==== BUILT-IN FUNCTIONS ==== """
+#region Built-in Functions
 
 func _ready() -> void:
 	""" Connect to relevant signals"""
@@ -47,6 +58,9 @@ func _ready() -> void:
 	health_component.health_is_zero.connect(on_health_is_zero)
 	
 	pickup_component.items_grabbed.connect(on_items_grabbed)
+	
+	m_current_interact_target = interaction_ray.get_current_target()
+	interaction_ray.target_changed.connect(on_interaction_target_changed)
 	
 	""" Initializing player parameters to set values... """
 	interaction_ray.target_position.y = interaction_range
@@ -56,14 +70,9 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Process event in dedicated function
-	handle_input_event(event)
-	
-	if event.is_action_pressed("ui_accept"):
-		hatchet.m_weapon_comp.is_equipped = not hatchet.m_weapon_comp.is_equipped
-		
-	
-	if Input.is_action_just_pressed("quit"):
-		get_tree().quit()
+	var is_input_handled = handle_input_event(event)
+	if is_input_handled:
+		return
 	
 	""" Handling mouse input for camera rotation """
 	if event is InputEventMouseMotion:
@@ -106,7 +115,7 @@ func _physics_process(delta: float) -> void:
 		armature.rotation.y = lerp_angle(armature.rotation.y, atan2(-velocity.x, -velocity.z), ACCELERATION)
 	else:
 		if !(is_instance_of(m_current_state, PlayerIdleState)):
-			state_machine.current_state.Transitioned.emit($StateMachine.current_state, "PlayerIdleState")
+			state_machine.current_state.Transitioned.emit(state_machine.current_state, "PlayerIdleState")
 			m_current_state = state_machine.current_state
 		
 		velocity.x = lerp(velocity.x, 0.0, ACCELERATION)
@@ -115,18 +124,34 @@ func _physics_process(delta: float) -> void:
 	animation_tree.set("parameters/RunSpeedFraction/blend_position", velocity.length()/SPEED)
 
 	move_and_slide()
+#endregion
 
 
 """ ==== UTILITY FUNCTIONS ==== """
-func handle_input_event(p_event: InputEvent):
-	if p_event.is_action_pressed("primary_action"):
+func handle_input_event(event: InputEvent):
+	var event_consumed: bool = false
+	
+	if event.is_action_pressed("ui_accept"):
+		event_consumed = true
+		hatchet.m_weapon_comp.is_equipped = not hatchet.m_weapon_comp.is_equipped
+		
+	elif event.is_action_pressed("primary_action"):
+		event_consumed = true
 		# 1. Do nothing if player is in menus
-		pass
+		
 		
 		# Spawn explosion at cursor on click
-
+	elif Input.is_action_just_pressed("quit"):
+		event_consumed = true
+		get_tree().quit()
+		
+	else:
+		pass
+	
+	return event_consumed
 
 """ === Signal Callbacks === """
+#region Signal Callbacks
 # Health Component Callbacks
 func on_damage_taken(health_component: HealthComponent, damage: float, new_health: float, attack: Attack):
 	print("Player Damage Taken!")
@@ -148,6 +173,8 @@ func on_items_grabbed(grabber: PickupComponent, grabbed_item: Item, grabbed_quan
 	var pickup_variables = {"name": grabbed_item.item_name, "quantity": grabbed_quant}
 	print("Picked up {quantity}x {name}!".format(pickup_variables))
 
+func on_interaction_target_changed(p_target):
+	pass
 
 """ ==== Component Getters ==== """
 func get_health_component():
@@ -164,3 +191,4 @@ func get_character_stats_component():
 func get_hitbox_component():
 	if hitbox_component:
 		return hitbox_component
+#endregion

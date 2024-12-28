@@ -14,6 +14,7 @@ and inserted into inventory.
 @export var item_name: String
 @export var item_id: Enums.ItemID
 @export var stack_size: int = 1
+@export var interact_message: String
 
 """ === FLAGS === """
 @export_category("Item Flags")

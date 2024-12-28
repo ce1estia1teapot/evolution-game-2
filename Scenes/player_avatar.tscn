@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://btkbb2ifqau8p"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Characters/player_avatar.gd" id="1_p8njv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mh1i1"]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c5x4y"]
+radius = 1.0
+height = 4.0
+
+[node name="PlayerAvatar" type="CharacterBody3D"]
+script = ExtResource("1_p8njv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("CapsuleMesh_mh1i1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_c5x4y")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]

@@ -1,14 +1,15 @@
-[gd_scene load_steps=23 format=4 uid="uid://1chn7tnasg0k"]
+[gd_scene load_steps=24 format=4 uid="uid://1chn7tnasg0k"]
 
-[ext_resource type="PackedScene" uid="uid://dyedm17usnfd5" path="res://Scenes/TestingAssets/test_player.tscn" id="1_eyocp"]
 [ext_resource type="PackedScene" uid="uid://dds1141sgxdrx" path="res://Scenes/test_enemy.tscn" id="2_auyn3"]
 [ext_resource type="PackedScene" uid="uid://b5vs0usx7hs7f" path="res://Scenes/TestingAssets/small_cube.tscn" id="3_ja3bx"]
 [ext_resource type="PackedScene" uid="uid://b56pbwo0q2bbe" path="res://Scenes/TestingAssets/test_wall.tscn" id="4_j4mcv"]
 [ext_resource type="PackedScene" uid="uid://diw8xfv6l16rl" path="res://Scenes/Assets/Models/Foliage/GrassPatch1.glb" id="5_dq8sm"]
 [ext_resource type="Material" uid="uid://ua4tddki2eq3" path="res://Assets/GodotMaterials/long_grass_material_1.tres" id="5_uugou"]
+[ext_resource type="PackedScene" uid="uid://bqe7ln8tc0fvy" path="res://Scenes/Assets/Testing_Assets/ramp_1.tscn" id="5_y1ytx"]
 [ext_resource type="PackedScene" uid="uid://cuj4p1xvrh85w" path="res://Scenes/test_nav_enemy.tscn" id="7_2bgp2"]
 [ext_resource type="Material" uid="uid://fkhkir6t1hml" path="res://addons/terrain_3d/demo/assets/materials/M_crystal_blue.tres" id="8_n21e7"]
 [ext_resource type="PackedScene" uid="uid://jukh1qirb21p" path="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="9_7oi5p"]
+[ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/player_avatar.tscn" id="10_4molb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gbgir"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -92,8 +93,7 @@ transform = Transform3D(1, 0, 0, 0, 0.0861125, 0.996285, 0, -0.996285, 0.0861124
 shadow_enabled = true
 directional_shadow_split_1 = 0.085
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("1_eyocp")]
-interaction_range = 4.72
+[node name="PlayerAvatar" parent="." instance=ExtResource("10_4molb")]
 
 [node name="Test_Enemy" parent="." instance=ExtResource("2_auyn3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7765, 1, -5)
@@ -125,6 +125,18 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 4, 0, -1, 0, -4.37114e-08, 50, 0,
 
 [node name="TestWall4" parent="EnvironmentAssets/Walls" instance=ExtResource("4_j4mcv")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 4, 0, -1, 0, -4.37114e-08, -50, 0, 50)
+
+[node name="Ramp1" parent="EnvironmentAssets" instance=ExtResource("5_y1ytx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 6)
+
+[node name="Ramp2" parent="EnvironmentAssets" instance=ExtResource("5_y1ytx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1, 7)
+
+[node name="Ramp3" parent="EnvironmentAssets" instance=ExtResource("5_y1ytx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 2, 8)
+
+[node name="Ramp4" parent="EnvironmentAssets" instance=ExtResource("5_y1ytx")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3, 9)
 
 [node name="Foliage" type="Node3D" parent="."]
 
