@@ -4,13 +4,20 @@ class_name PlayerAvatar
 """ ==== CHILD NODES ==== """
 @onready var n_head: Node3D = $Head
 @onready var n_camera: Camera3D = $Head/Camera3D
+@onready var n_collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var n_overhead_detector: ShapeCast3D = $OverheadDetector
 
 """ ==== SETTINGS ===="""
 @export_category("Player Settings")
+@export_group("Gameplay")
+@export var fall_damage_threshold: int = 5
+
 @export_group("Movement")
 @export var speed = 5.0
 @export var acceleration = 16
 @export var jump_velocity = 8
+@export var crouch_height: float = 2.0
+@export var crouch_speed: float = 8.0
 
 @export_group("Camera")
 @export var camera_sensitivity: float = 0.1
@@ -20,8 +27,11 @@ class_name PlayerAvatar
 """ ==== Attributes ==== """
 var m_look_rot: Vector2
 var player_gravity: Vector3
+var stand_height: float
+var old_vel: float = 0.0
 
 func _ready() -> void:
+	stand_height = n_collision_shape.shape.height
 	player_gravity = get_gravity()
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -43,6 +53,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = jump_velocity
+		elif Input.is_action_pressed("crouch") or n_overhead_detector.is_colliding():
+			crouch(delta, false)
+		else:
+			crouch(delta, true)
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -58,3 +72,19 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	n_head.rotation_degrees.x = m_look_rot.x
 	rotation_degrees.y = m_look_rot.y
+	
+	var diff = velocity.y - old_vel
+	if (diff > fall_damage_threshold) and (old_vel < 0):
+		print("Fall damage taken: {dam}".format({"dam": diff}))
+	old_vel = velocity.y
+
+func crouch(p_delta: float, p_reverse: bool = false):
+	var target_height: float = crouch_height if not p_reverse else stand_height
+	
+	# Shrink the collision shape
+	n_collision_shape.shape.height = lerp(n_collision_shape.shape.height, target_height, crouch_speed * p_delta)
+	# Reposition the shape according to new height
+	n_collision_shape.position.y = lerp(n_collision_shape.position.y, target_height * 0.5, crouch_speed * p_delta)
+	# Reposition head (and camera) to new height
+	n_head.position.y = lerp(n_head.position.y, target_height - 1, crouch_speed * p_delta)
+	
