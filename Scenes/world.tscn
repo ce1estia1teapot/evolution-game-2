@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cbglvprni1lic"]
 
-[ext_resource type="Script" path="res://Scripts/world.gd" id="1_7g8wr"]
+[ext_resource type="Script" path="res://Scripts/WorldState.gd" id="1_7g8wr"]
 [ext_resource type="PackedScene" uid="uid://1chn7tnasg0k" path="res://Scenes/sandbox_level.tscn" id="1_clt8u"]
 [ext_resource type="Script" path="res://Scripts/States/MenuManager.gd" id="2_2j3ck"]
 [ext_resource type="Script" path="res://Scripts/States/MenuStates/pause_menu.gd" id="3_ku2x7"]

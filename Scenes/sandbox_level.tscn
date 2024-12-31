@@ -7,9 +7,9 @@
 [ext_resource type="Material" uid="uid://ua4tddki2eq3" path="res://Assets/GodotMaterials/long_grass_material_1.tres" id="5_uugou"]
 [ext_resource type="PackedScene" uid="uid://bqe7ln8tc0fvy" path="res://Scenes/Assets/Testing_Assets/ramp_1.tscn" id="5_y1ytx"]
 [ext_resource type="PackedScene" uid="uid://cuj4p1xvrh85w" path="res://Scenes/test_nav_enemy.tscn" id="7_2bgp2"]
-[ext_resource type="Material" uid="uid://fkhkir6t1hml" path="res://addons/terrain_3d/demo/assets/materials/M_crystal_blue.tres" id="8_n21e7"]
 [ext_resource type="PackedScene" uid="uid://jukh1qirb21p" path="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="9_7oi5p"]
 [ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/player_avatar.tscn" id="10_4molb"]
+[ext_resource type="PackedScene" uid="uid://nlwx02tg6cfp" path="res://Scenes/TestingAssets/scene_swap_portal.tscn" id="11_2hvr8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gbgir"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -197,13 +197,15 @@ nav_box = NodePath("../NavRegion1/Platform")
 
 [node name="InteractionTest" type="Node3D" parent="TestAreas"]
 
-[node name="CSGBox3D" type="CSGBox3D" parent="TestAreas/InteractionTest"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0.5, 13)
-material = ExtResource("8_n21e7")
+[node name="PickupTest" type="Node3D" parent="TestAreas"]
 
-[node name="Pickup Test" type="Node3D" parent="TestAreas"]
-
-[node name="metal_hatchet" parent="TestAreas/Pickup Test" instance=ExtResource("9_7oi5p")]
+[node name="metal_hatchet" parent="TestAreas/PickupTest" instance=ExtResource("9_7oi5p")]
 transform = Transform3D(3.2, 0, 0, 0, 3.2, 0, 0, 0, 3.2, -0.000133961, 1.39089, -3.01686)
+
+[node name="SceneSwap" type="Node3D" parent="TestAreas"]
+
+[node name="SceneSwapPortal" parent="TestAreas/SceneSwap" instance=ExtResource("11_2hvr8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -13.5308)
+target_scene = "res://Scenes/TestingAssets/portal_destination_scene.tscn"
 
 [editable path="Foliage/Grass/GrassPatch1"]

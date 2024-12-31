@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://c2cv3fanv2hfl"]
+
+[ext_resource type="Material" uid="uid://dlmtxs0c66hj3" path="res://addons/terrain_3d/demo/assets/materials/M_rock30.tres" id="1_4ok3i"]
+[ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/player_avatar.tscn" id="1_ckqht"]
+[ext_resource type="PackedScene" uid="uid://nlwx02tg6cfp" path="res://Scenes/TestingAssets/scene_swap_portal.tscn" id="3_n62p8"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3slhi"]
+sky_top_color = Color(0.575962, 0.270416, 0.797494, 1)
+sky_horizon_color = Color(0.693991, 0.609854, 0.732624, 1)
+sky_energy_multiplier = 0.6
+ground_horizon_color = Color(0.693991, 0.609854, 0.732624, 1)
+
+[sub_resource type="Sky" id="Sky_psqd4"]
+sky_material = SubResource("ProceduralSkyMaterial_3slhi")
+
+[sub_resource type="Environment" id="Environment_tjytm"]
+background_mode = 2
+sky = SubResource("Sky_psqd4")
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_37e6a"]
+size = Vector3(15, 0.15, 15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_gm2tk"]
+points = PackedVector3Array(-7.5, -0.075, -7.5, -7.5, 0.075, -7.5, 7.5, -0.075, -7.5, -7.5, -0.075, 7.5, -7.5, 0.075, 7.5, 7.5, 0.075, -7.5, 7.5, -0.075, 7.5, 7.5, 0.075, 7.5)
+
+[node name="PortalDestinationScene" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tjytm")
+
+[node name="PlayerAvatar" parent="." instance=ExtResource("1_ckqht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.520086, 4.75594)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_37e6a")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_4ok3i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_gm2tk")
+
+[node name="SceneSwapPortal" parent="." instance=ExtResource("3_n62p8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.18997, -4.5941)
+target_scene = "res://Scenes/sandbox_level.tscn"

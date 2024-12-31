@@ -5,6 +5,11 @@ enum DamageTypes {
 	BLUDGEONING = 1,
 	PIERCING = 2,
 	MAGIC = 3,
+	FALL = 4,
+}
+
+enum WorldStateKeys {
+	HEALTH = 1
 }
 
 enum HealthStatus {
@@ -22,11 +27,6 @@ enum InteractionComponentMode{
 enum CameraEnum{
 	CAMERA1 = 1,
 	CAMERA2 = 2
-}
-
-enum WorldReportType{
-	PUT = 1,
-	DELETE = 2,
 }
 
 enum ItemID {

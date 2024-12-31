@@ -20,11 +20,13 @@ MainSignalBus="*res://Scripts/Signals/MainSignalBus.gd"
 Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
 PlayerSignalBus="*res://Scripts/Signals/PlayerSignalBus.gd"
 DamageNumbers="*res://Scripts/Singletons/DamageNumbers.gd"
+WorldState="*res://Scripts/WorldState.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/initial_screen=2
 
 [editor_plugins]
 

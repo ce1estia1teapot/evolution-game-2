@@ -2,18 +2,44 @@
 extends Node
 class_name HealthComponent
 
-signal damage_taken(health_component: HealthComponent, damages: Dictionary, total_damage: float, new_health: float, attack: Attack)
-signal attack_applied(health_component: HealthComponent, attack: Attack)
+signal attack_received(health_component: HealthComponent, damages: Dictionary, total_damage: float, attack: Attack)
+signal knockback_received(knockback_force: float)
 signal health_is_zero(health_component: HealthComponent)
+signal health_changed(health_component: HealthComponent, old_health: float, new_health: float)
 
 # Health
-var HEALTH: float
-@export var MAX_HEALTH: float = 100
+var HEALTH: float :
+	get():
+		return HEALTH
+	set(p_health):
+		# Clamp to reasonable range
+		var health_temp: float = clampf(p_health, 0.0, MAX_HEALTH)
+		# Round to 2 decimal places
+		health_temp = round_place(health_temp, 2)
+		
+		self.health_changed.emit(self, HEALTH, health_temp)
+		
+		HEALTH = health_temp
+		print("Health changed: {health}".format({"health": HEALTH}))
+		
+		# Check for death, emit signal if == 0
+		if HEALTH == 0.0:
+			self.health_is_zero.emit(self)
+			print("You died!")
+
+
+@export_group("General")
+@export var MAX_HEALTH: float = 100.0
 
 # Armor
 @export var armor: int = 0
 @export var armor_dam_red_per_point: float = 1.0
-var armor_dam_reduction: float
+var armor_dam_reduction: float :
+	get():
+		if armor and armor_dam_red_per_point:
+			return armor * armor_dam_red_per_point
+		else:
+			return 0.0
 
 # Active Statuses & Conditions
 # k:v Enums.HealthStatus: int (number of stacks)
@@ -27,47 +53,62 @@ var upgrades: Array = []
 # A dictionary of the format Dictionary[Enums.DamageTypes, float]
 # Where the float is the percentage resistance against the given damage type.
 # Similar for vulnerabilities, but percentages are damage increases
-var resistances: Dictionary = {}
-var vulnerabilities: Dictionary = {}
+
+@export_group("Modifiers")
+@export var resistances: Dictionary
+@export var vulnerabilities: Dictionary
 
 func _ready() -> void:
 	HEALTH = MAX_HEALTH
+
+func _modify_damage(p_damage: float, p_type: Enums.DamageTypes) -> float:
+	"""
+	This method takes a float and a damage type, then applies resistances, vulnerabilities, and armor before returning
+	"""
+	# Return if arguments are null
+	if (not p_damage) or (not p_type):
+		return 0.0
 	
-	armor_dam_reduction = armor * armor_dam_reduction
+	var current_damage: float = p_damage
+	var resistance: float = 0.0
+	var vulnerability: float = 0.0
+	if resistances:
+		resistance = resistances.get(p_type) if (p_type in resistances) else 0.0
+	if vulnerabilities:
+		vulnerability = vulnerabilities.get(p_type) if (p_type in vulnerabilities) else 0.0
+	
+	# Apply Resistance and/or vulnerability
+	current_damage = current_damage * (1 - resistance)
+	current_damage = current_damage / (1 - vulnerability)
+	
+	# Apply armor, if appropriate
+	if p_type == Enums.DamageTypes.BLUDGEONING:
+		current_damage = current_damage * (1 - armor_dam_reduction)
+	
+	return current_damage
+
+
+
+func apply_damage(p_damage: float, p_type: Enums.DamageTypes) -> void:
+	"""
+	This method simply applies damage of a given type to the health component
+	"""
+	# Calculate modified damage...
+	var modified_damage = _modify_damage(p_damage, p_type)
+	
+	# Apply Damage to health and emit signal
+	HEALTH = HEALTH - modified_damage
 
 func apply_attack(p_attack: Attack) -> void:
 	if not p_attack:
 		return
-	
-	# Emit signal so parent can use knockback values
-	self.attack_applied.emit(self, p_attack)
-	
-	# Extract stats from attack
-	var bludgeoning: float = p_attack.bludgeoning
-	var piercing: float = p_attack.piercing
-	var magic: float = p_attack.magic
-	var knockback: float = p_attack.knockback
+		
+	# Extract stats from attack and modify with resistance, vulnerability, and armor
+	var bludgeoning: float = _modify_damage(p_attack.bludgeoning, Enums.DamageTypes.BLUDGEONING)
+	var piercing: float = _modify_damage(p_attack.piercing, Enums.DamageTypes.PIERCING)
+	var magic: float = _modify_damage(p_attack.magic, Enums.DamageTypes.MAGIC)
 	var knockback_force: float = p_attack.knockback_force
-	
-	# Apply resistances to damage type values to reduce damages
-	if Enums.DamageTypes.BLUDGEONING in resistances:
-		bludgeoning = (1-resistances[Enums.DamageTypes.BLUDGEONING])*bludgeoning
-	if Enums.DamageTypes.PIERCING in resistances:
-		piercing = (1-resistances[Enums.DamageTypes.PIERCING])*piercing
-	if Enums.DamageTypes.MAGIC in resistances:
-		magic = (1-resistances[Enums.DamageTypes.MAGIC])*magic
-	
-	# Apply vulnerabilities to damage type values to increase damages
-	if Enums.DamageTypes.BLUDGEONING in vulnerabilities:
-		bludgeoning = bludgeoning/(1-vulnerabilities[Enums.DamageTypes.BLUDGEONING])
-	if Enums.DamageTypes.PIERCING in vulnerabilities:
-		piercing = piercing/(1-vulnerabilities[Enums.DamageTypes.PIERCING])
-	if Enums.DamageTypes.MAGIC in vulnerabilities:
-		magic = magic/(1-vulnerabilities[Enums.DamageTypes.MAGIC])
-	
-	# Apply armor to damage types that it reduces (Bludgeoning?)
-	bludgeoning = (1-armor_dam_reduction) * bludgeoning
-	
+
 	# Sum final damages together for total damage
 	var total_damage: float = bludgeoning + piercing + magic
 	
@@ -78,6 +119,18 @@ func apply_attack(p_attack: Attack) -> void:
 		Enums.DamageTypes.MAGIC: magic,
 	}
 	
-	HEALTH = HEALTH - total_damage
-	self.damage_taken.emit(self, final_damages, total_damage, HEALTH, p_attack)
 	
+	var new_health = HEALTH - total_damage
+	
+	self.health_changed.emit(self, HEALTH, new_health)
+	self.knockback_received.emit(knockback_force)
+	self.damage_taken.emit(self, final_damages, total_damage, new_health, p_attack)
+	
+	HEALTH = new_health
+	
+	
+func round_place(num: float,places: int) -> float:
+	if (not num) or (not places):
+		return num
+	
+	return (round(num*pow(10,places))/pow(10,places))

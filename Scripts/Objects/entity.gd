@@ -1,10 +1,9 @@
 extends Node
 class_name Entity
 
-
-func broadcast_world_state_update():
+func _update_in_world_state() -> void:
 	"""
-	The common abstract functiopn used by Entities to assemble and broadcase a world state report. Should
-	be implemented by each bottom-level class
+	This function is meant to standardize the construction and transmission of 
+	WorldStateReport objects by Entities.
 	"""
 	pass
