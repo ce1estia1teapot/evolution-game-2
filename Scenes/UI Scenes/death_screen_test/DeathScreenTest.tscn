@@ -7,7 +7,7 @@
 font_size = 156
 font_color = Color(0.55484, 0.0829332, 0.629225, 1)
 
-[node name="death_screen_test" type="Panel"]
+[node name="DeathScreenTest" type="Panel"]
 custom_minimum_size = Vector2(0, 423.14)
 anchors_preset = 14
 anchor_top = 0.5

@@ -6,6 +6,7 @@ class_name PlayerInterfaceManager
 @onready var n_hurt_overlay: TextureRect = $HurtOverlay
 @onready var n_death_screen_test: Panel = $DeathScreenTest
 
+
 """ ===== Exports ==== """
 @export_group("Hurt Overlay")
 @export var hurt_overlay_fadeout_s: float = 0.5

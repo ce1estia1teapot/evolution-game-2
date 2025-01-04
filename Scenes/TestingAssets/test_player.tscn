@@ -87,26 +87,26 @@ collide_with_bodies = false
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-bones/0/position = Vector3(5.81154e-05, 1.01146, 0.00630805)
-bones/0/rotation = Quaternion(-0.0101059, -0.0126569, 0.00156038, 0.999868)
-bones/2/rotation = Quaternion(-0.100748, 0.188215, 0.911825, -0.350713)
-bones/3/rotation = Quaternion(0.639128, -0.305091, -0.518288, 0.479387)
-bones/4/rotation = Quaternion(0.0710359, 0.0029531, 0.996494, -0.0440906)
+bones/0/position = Vector3(-1.15852e-05, 1.01036, 0.00554889)
+bones/0/rotation = Quaternion(-0.00998077, 0.0110689, -0.00142453, 0.999888)
+bones/2/rotation = Quaternion(-0.119914, 0.129023, 0.929854, -0.323025)
+bones/3/rotation = Quaternion(0.625485, -0.337064, -0.50007, 0.495062)
+bones/4/rotation = Quaternion(0.0481024, 0.102627, 0.992755, -0.0398838)
 bones/4/scale = Vector3(1.00003, 0.999999, 1)
-bones/5/rotation = Quaternion(-0.15049, -0.000460999, 0.00268021, 0.988608)
-bones/6/rotation = Quaternion(0.605488, 0.0443866, -0.0603831, 0.792318)
+bones/5/rotation = Quaternion(-0.215952, -0.00045529, 0.00384608, 0.976396)
+bones/6/rotation = Quaternion(0.610607, 0.0409135, -0.0576062, 0.788776)
 bones/6/scale = Vector3(1.00001, 1.00001, 1)
-bones/7/rotation = Quaternion(0.199115, -0.213815, 0.889743, 0.350704)
-bones/8/rotation = Quaternion(0.855944, 0.255742, 0.178607, 0.412377)
+bones/7/rotation = Quaternion(0.16541, -0.184552, 0.88329, 0.397968)
+bones/8/rotation = Quaternion(0.85798, 0.223944, 0.184351, 0.42395)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(-0.0500718, 0.0949289, 0.993459, 0.0389996)
+bones/9/rotation = Quaternion(-0.0723863, 0.0108019, 0.99626, 0.0459229)
 bones/9/scale = Vector3(1.00003, 1, 1)
-bones/10/rotation = Quaternion(-0.202824, 0.000456593, -0.00361226, 0.979209)
-bones/11/rotation = Quaternion(0.600457, -0.044158, 0.060368, 0.796152)
+bones/10/rotation = Quaternion(-0.166678, 0.000459782, -0.00296852, 0.986007)
+bones/11/rotation = Quaternion(0.60894, -0.0478969, 0.0623013, 0.789314)
 bones/11/scale = Vector3(1.00001, 1.00001, 1)
 
 [node name="HandSocketR" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.947406, 0.318089, -0.035214, 0.000805043, 0.112401, 0.993662, 0.320031, 0.941374, -0.106746, -0.388442, 1.32967, -0.0848376)
+transform = Transform3D(-0.908615, 0.407702, 0.0905372, 0.153735, 0.124952, 0.98018, 0.388308, 0.904525, -0.176211, -0.405746, 1.34504, -0.0536584)
 bone_name = "lowerarm.r"
 bone_idx = 8
 
