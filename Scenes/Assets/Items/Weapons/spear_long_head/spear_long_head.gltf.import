@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://maey41n4in0u"
-path="res://.godot/imported/Mushroom2.glb-0ea8b6c5043ec22fb00cab712f96b1a3.scn"
+uid="uid://w4ki27yfeb87"
+path="res://.godot/imported/spear_long_head.gltf-a0b51dea5db211595318d4775f1f30f9.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/Foliage/Mushroom2.glb"
-dest_files=["res://.godot/imported/Mushroom2.glb-0ea8b6c5043ec22fb00cab712f96b1a3.scn"]
+source_file="res://Scenes/Assets/Items/Weapons/spear_long_head/spear_long_head.gltf"
+dest_files=["res://.godot/imported/spear_long_head.gltf-a0b51dea5db211595318d4775f1f30f9.scn"]
 
 [params]
 
-nodes/root_type="MeshInstance3D"
-nodes/root_name="SmallOrangeMushroom"
+nodes/root_type="Node3D"
+nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

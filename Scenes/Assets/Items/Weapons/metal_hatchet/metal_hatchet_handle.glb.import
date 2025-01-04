@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://borb5xfbrdwrw"
-path="res://.godot/imported/CharacterModel1.glb-1bf82ebbbac8c514039025b90de121e9.scn"
+uid="uid://ctvunmfr4gs2w"
+path="res://.godot/imported/metal_hatchet_handle.glb-9cca88f643123e536e83dad35fa10c27.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/CharacterModel1.glb"
-dest_files=["res://.godot/imported/CharacterModel1.glb-1bf82ebbbac8c514039025b90de121e9.scn"]
+source_file="res://Scenes/Assets/Items/Weapons/metal_hatchet/metal_hatchet_handle.glb"
+dest_files=["res://.godot/imported/metal_hatchet_handle.glb-9cca88f643123e536e83dad35fa10c27.scn"]
 
 [params]
 
-nodes/root_type=""
+nodes/root_type="Node3D"
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

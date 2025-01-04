@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dx75bswpxeldh"
-path="res://.godot/imported/Tree2.glb-30b6d1289ab44cbda0cdfa74cb21d515.scn"
+uid="uid://diw8xfv6l16rl"
+path="res://.godot/imported/GrassPatch1.glb-345055ceed18c156052e457fcb9d91cd.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/Foliage/Tree2.glb"
-dest_files=["res://.godot/imported/Tree2.glb-30b6d1289ab44cbda0cdfa74cb21d515.scn"]
+source_file="res://Scenes/Assets/Foliage/GrassPatch1.glb"
+dest_files=["res://.godot/imported/GrassPatch1.glb-345055ceed18c156052e457fcb9d91cd.scn"]
 
 [params]
 
 nodes/root_type="MeshInstance3D"
-nodes/root_name="Tree2"
+nodes/root_name="GrassPatch1"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

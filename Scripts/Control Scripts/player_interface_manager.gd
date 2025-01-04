@@ -28,10 +28,11 @@ func show_death_screen() -> void:
 	It should:
 		1. Set its own mouse filtering to 'stop'
 		2. Call 'show()' on n_death_screen_test
+		3. Call Input.mouse
 	"""
-	self.mouse_filter = Control.MOUSE_FILTER_STOP
-	
+	n_death_screen_test.mouse_filter = Control.MOUSE_FILTER_STOP
 	n_death_screen_test.show()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 #endregion
 

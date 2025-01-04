@@ -1,17 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://jukh1qirb21p"]
+[gd_scene load_steps=6 format=3 uid="uid://jukh1qirb21p"]
 
-[ext_resource type="PackedScene" uid="uid://bggc27qubbuef" path="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet.glb" id="1_6lejx"]
+[ext_resource type="PackedScene" uid="uid://bggc27qubbuef" path="res://Scenes/Assets/Items/Weapons/metal_hatchet/metal_hatchet.glb" id="1_6lejx"]
 [ext_resource type="Script" path="res://Scripts/Objects/Gear/metal_hatchet.gd" id="2_2nybw"]
 [ext_resource type="Script" path="res://Scripts/Components/hitbox_component.gd" id="4_ox51x"]
 [ext_resource type="Script" path="res://Scripts/Components/weapon_component.gd" id="5_fyfvy"]
-[ext_resource type="Script" path="res://Scripts/Components/interaction_component.gd" id="6_wi7a8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s7nui"]
 size = Vector3(0.0425415, 0.104797, 0.070343)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0tke"]
-radius = 0.107
-height = 0.415
 
 [node name="metal_hatchet" instance=ExtResource("1_6lejx")]
 transform = Transform3D(1.645, 0, 0, 0, 1.645, 0, 0, 0, 1.645, 0, 0, 0)
@@ -31,15 +26,5 @@ script = ExtResource("4_ox51x")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.24196e-05, -0.00447193, 0.0177958)
 shape = SubResource("BoxShape3D_s7nui")
 
-[node name="InteractionComponent" type="Area3D" parent="Components" index="1"]
-script = ExtResource("6_wi7a8")
-stack_size = 1
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/InteractionComponent" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.113, 0)
-shape = SubResource("CapsuleShape3D_a0tke")
-
-[node name="WeaponComponent" type="Node" parent="Components" index="2"]
+[node name="WeaponComponent" type="Node" parent="Components" index="1"]
 script = ExtResource("5_fyfvy")
-
-[connection signal="interaction_queue_free" from="Components/InteractionComponent" to="Components/InteractionComponent" method="_on_interaction_queue_free"]

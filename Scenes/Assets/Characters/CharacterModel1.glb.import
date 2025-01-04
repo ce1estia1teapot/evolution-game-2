@@ -3,17 +3,17 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bggc27qubbuef"
-path="res://.godot/imported/metal_hatchet.glb-1064d3bfb10bfb8a98655437fbec72bc.scn"
+uid="uid://borb5xfbrdwrw"
+path="res://.godot/imported/CharacterModel1.glb-76d6e4b3f7fa12ccd87d5c611fe2e1d6.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet.glb"
-dest_files=["res://.godot/imported/metal_hatchet.glb-1064d3bfb10bfb8a98655437fbec72bc.scn"]
+source_file="res://Scenes/Assets/Characters/CharacterModel1.glb"
+dest_files=["res://.godot/imported/CharacterModel1.glb-76d6e4b3f7fa12ccd87d5c611fe2e1d6.scn"]
 
 [params]
 
-nodes/root_type="Node3D"
+nodes/root_type=""
 nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -25,7 +25,7 @@ meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 meshes/force_disable_compression=false
 skins/use_named_skins=true
-animation/import=false
+animation/import=true
 animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true

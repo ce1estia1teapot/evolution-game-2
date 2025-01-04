@@ -1,11 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://btkbb2ifqau8p"]
+[gd_scene load_steps=12 format=3 uid="uid://btkbb2ifqau8p"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/Characters/player_avatar.gd" id="1_p8njv"]
+[ext_resource type="Script" path="res://Scripts/Characters/player_avatar.gd" id="1_p8njv"]
 [ext_resource type="Texture2D" uid="uid://befvayb4dc2ym" path="res://Assets/Textures/player_hurt.png" id="2_2qbj6"]
+[ext_resource type="PackedScene" uid="uid://dcj5u424fgpkd" path="res://Scenes/Tools/interact_ray.tscn" id="2_mqr44"]
 [ext_resource type="Script" path="res://Scripts/Control Scripts/player_interface_manager.gd" id="3_c74jr"]
 [ext_resource type="PackedScene" uid="uid://r2titniqktfe" path="res://Scenes/Components Scenes/health_component.tscn" id="3_m335w"]
-[ext_resource type="PackedScene" uid="uid://8o01nwkr3jje" path="res://Scenes/UI Scenes/health_bar_hud.tscn" id="5_iha6i"]
-[ext_resource type="PackedScene" uid="uid://cn2b2hmhqm1ay" path="res://Scenes/UI Scenes/death_screen_test/DeathScreenTest.tscn" id="6_ayd0b"]
+[ext_resource type="Texture2D" uid="uid://c0mdol6ufr2fc" path="res://Assets/Icons/crosshair_circle.png" id="5_es2o3"]
+[ext_resource type="PackedScene" uid="uid://8o01nwkr3jje" path="res://Scenes/UIScenes/health_bar_hud.tscn" id="5_iha6i"]
+[ext_resource type="PackedScene" uid="uid://cn2b2hmhqm1ay" path="res://Scenes/UIScenes/death_screen_test/DeathScreenTest.tscn" id="6_ayd0b"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_05lce"]
 radius = 0.9
@@ -19,6 +21,7 @@ radius = 1.0
 height = 4.0
 
 [node name="PlayerAvatar" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_p8njv")
 jump_velocity = 20
 
@@ -41,10 +44,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Head"]
 
+[node name="InteractRay" parent="Head" instance=ExtResource("2_mqr44")]
+visible = false
+
 [node name="Components" type="Node" parent="."]
 
 [node name="HealthComponent" parent="Components" instance=ExtResource("3_m335w")]
-HEALTH = 15.0
+HEALTH = 100.0
 
 [node name="PlayerInterfaceManager" type="Control" parent="."]
 layout_mode = 3
@@ -53,11 +59,23 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("3_c74jr")
+
+[node name="Crosshair" type="TextureRect" parent="PlayerInterfaceManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.301
+offset_right = 12.301
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_es2o3")
 
 [node name="HealthBarHUD" parent="PlayerInterfaceManager" instance=ExtResource("5_iha6i")]
 layout_mode = 1
+mouse_filter = 2
 
 [node name="DeathScreenTest" parent="PlayerInterfaceManager" instance=ExtResource("6_ayd0b")]
 visible = false
@@ -74,4 +92,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_2qbj6")

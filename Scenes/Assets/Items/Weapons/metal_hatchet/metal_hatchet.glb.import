@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://diw8xfv6l16rl"
-path="res://.godot/imported/GrassPatch1.glb-65d8626aab6ab25e818078ccf288bb49.scn"
+uid="uid://bggc27qubbuef"
+path="res://.godot/imported/metal_hatchet.glb-4581059081e6006827e80e21da4798b0.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/Foliage/GrassPatch1.glb"
-dest_files=["res://.godot/imported/GrassPatch1.glb-65d8626aab6ab25e818078ccf288bb49.scn"]
+source_file="res://Scenes/Assets/Items/Weapons/metal_hatchet/metal_hatchet.glb"
+dest_files=["res://.godot/imported/metal_hatchet.glb-4581059081e6006827e80e21da4798b0.scn"]
 
 [params]
 
-nodes/root_type="MeshInstance3D"
-nodes/root_name="GrassPatch1"
+nodes/root_type="Node3D"
+nodes/root_name=""
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

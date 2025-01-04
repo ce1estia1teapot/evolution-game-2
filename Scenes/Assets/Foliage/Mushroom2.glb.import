@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dk0ijbny4o5jo"
-path="res://.godot/imported/Mushroom1.glb-68394782110dfb428d2d7d7eb5f8e82f.scn"
+uid="uid://maey41n4in0u"
+path="res://.godot/imported/Mushroom2.glb-d2d6993215f6f1b3f49d9499fd828376.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/Foliage/Mushroom1.glb"
-dest_files=["res://.godot/imported/Mushroom1.glb-68394782110dfb428d2d7d7eb5f8e82f.scn"]
+source_file="res://Scenes/Assets/Foliage/Mushroom2.glb"
+dest_files=["res://.godot/imported/Mushroom2.glb-d2d6993215f6f1b3f49d9499fd828376.scn"]
 
 [params]
 
-nodes/root_type=""
-nodes/root_name=""
+nodes/root_type="MeshInstance3D"
+nodes/root_name="SmallOrangeMushroom"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

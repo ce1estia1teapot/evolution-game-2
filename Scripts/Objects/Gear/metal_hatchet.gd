@@ -4,12 +4,11 @@ class_name MetalHatchet
 """ Grabbing components on ready... """
 @onready var m_hitbox_comp: HitboxComponent = $Components/HitboxComponent
 @onready var m_weapon_comp: WeaponComponent = $Components/WeaponComponent
-@onready var m_interaction_comp: InteractionComponent = $Components/InteractionComponent
 
 """ Built-ins """
 #region Built-in Functions
 func _ready() -> void:
-	m_interaction_comp.interaction_queue_free.connect(on_interaction_queue_free)
+	pass
 
 func _process(delta: float) -> void:
 	if m_weapon_comp.is_equipped:

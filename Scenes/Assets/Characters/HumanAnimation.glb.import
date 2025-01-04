@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://ctvunmfr4gs2w"
-path="res://.godot/imported/metal_hatchet_handle.glb-6bbe82c72f65998d2830c2acdc336024.scn"
+uid="uid://dxr3f2t3jj4kw"
+path="res://.godot/imported/HumanAnimation.glb-67e58ea9f4f677fd02798c03aa6a03a6.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet_handle.glb"
-dest_files=["res://.godot/imported/metal_hatchet_handle.glb-6bbe82c72f65998d2830c2acdc336024.scn"]
+source_file="res://Scenes/Assets/Characters/HumanAnimation.glb"
+dest_files=["res://.godot/imported/HumanAnimation.glb-67e58ea9f4f677fd02798c03aa6a03a6.scn"]
 
 [params]
 
-nodes/root_type="Node3D"
-nodes/root_name=""
+nodes/root_type="CharacterBody3D"
+nodes/root_name="PlayerCharacter"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false

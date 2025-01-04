@@ -1,13 +1,14 @@
-[gd_scene load_steps=24 format=4 uid="uid://1chn7tnasg0k"]
+[gd_scene load_steps=25 format=4 uid="uid://1chn7tnasg0k"]
 
 [ext_resource type="PackedScene" uid="uid://dds1141sgxdrx" path="res://Scenes/test_enemy.tscn" id="2_auyn3"]
 [ext_resource type="PackedScene" uid="uid://b5vs0usx7hs7f" path="res://Scenes/TestingAssets/small_cube.tscn" id="3_ja3bx"]
 [ext_resource type="PackedScene" uid="uid://b56pbwo0q2bbe" path="res://Scenes/TestingAssets/test_wall.tscn" id="4_j4mcv"]
-[ext_resource type="PackedScene" uid="uid://diw8xfv6l16rl" path="res://Scenes/Assets/Models/Foliage/GrassPatch1.glb" id="5_dq8sm"]
+[ext_resource type="PackedScene" uid="uid://diw8xfv6l16rl" path="res://Scenes/Assets/Foliage/GrassPatch1.glb" id="5_dq8sm"]
 [ext_resource type="Material" uid="uid://ua4tddki2eq3" path="res://Assets/GodotMaterials/long_grass_material_1.tres" id="5_uugou"]
-[ext_resource type="PackedScene" uid="uid://bqe7ln8tc0fvy" path="res://Scenes/Assets/Testing_Assets/ramp_1.tscn" id="5_y1ytx"]
+[ext_resource type="PackedScene" uid="uid://bqe7ln8tc0fvy" path="res://Scenes/Assets/TestingAssets/ramp_1.tscn" id="5_y1ytx"]
 [ext_resource type="PackedScene" uid="uid://cuj4p1xvrh85w" path="res://Scenes/test_nav_enemy.tscn" id="7_2bgp2"]
-[ext_resource type="PackedScene" uid="uid://jukh1qirb21p" path="res://Scenes/Assets/Models/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="9_7oi5p"]
+[ext_resource type="PackedScene" uid="uid://jukh1qirb21p" path="res://Scenes/Assets/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="9_7oi5p"]
+[ext_resource type="PackedScene" uid="uid://bjspnmao3w0bc" path="res://Scenes/Assets/TestingAssets/TestChest/test_chest_deployed.tscn" id="9_fyvnj"]
 [ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/player_avatar.tscn" id="10_4molb"]
 [ext_resource type="PackedScene" uid="uid://nlwx02tg6cfp" path="res://Scenes/TestingAssets/scene_swap_portal.tscn" id="11_2hvr8"]
 
@@ -196,6 +197,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1607, 1.66786, -2.03541)
 nav_box = NodePath("../NavRegion1/Platform")
 
 [node name="InteractionTest" type="Node3D" parent="TestAreas"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63496, 0, 4.97298)
+
+[node name="TestChestDeployed" parent="TestAreas/InteractionTest" instance=ExtResource("9_fyvnj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.280581, 0, 0)
 
 [node name="PickupTest" type="Node3D" parent="TestAreas"]
 

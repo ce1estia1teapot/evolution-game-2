@@ -2,17 +2,23 @@ extends Character
 class_name PlayerAvatar
 
 """ ==== CHILD NODES ==== """
+# Head parts
 @onready var n_head: Node3D = $Head
 @onready var n_camera: Camera3D = $Head/Camera3D
-@onready var n_collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var n_overhead_detector: ShapeCast3D = $OverheadDetector
+@onready var n_interact_ray: InteractRay = $Head/InteractRay
 
+# Components
 @onready var n_health_component: HealthComponent = $Components/HealthComponent
 
+# UI Stuff
 @onready var n_player_interface_manager: PlayerInterfaceManager = $PlayerInterfaceManager
 @onready var n_hurt_overlay: TextureRect = $PlayerInterfaceManager/HurtOverlay
 @onready var n_health_bar_hud: HealthBarHUD = $PlayerInterfaceManager/HealthBarHUD
 @onready var n_death_screen_test: Panel = $PlayerInterfaceManager/DeathScreenTest
+
+# Misc.
+@onready var n_collision_shape: CollisionShape3D = $CollisionShape3D
+@onready var n_overhead_detector: ShapeCast3D = $OverheadDetector
 
 
 """ ==== SETTINGS ===="""
@@ -54,6 +60,8 @@ var attribute_placeholder
 #region Built-in Functions
 func _ready() -> void:
 	# Signal Connections
+	PlayerSignalBus.inventory_interacted.connect(_on_inventory_interacted)
+	
 	n_health_component.attack_received.connect(on_health_component_attack_received)
 	n_health_component.health_changed.connect(on_health_component_health_changed)
 	n_health_component.health_is_zero.connect(on_health_component_health_is_zero)
@@ -159,6 +167,9 @@ func _handle_gameplay_input() -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	elif Input.is_action_just_pressed("interact_primary"):
+		n_interact_ray.attempt_interact()
 
 func _update_in_world_state() -> void:
 	var update_dict: Dictionary = _generate_world_state_dict()
@@ -199,6 +210,13 @@ func fall_damage(p_damage: float) -> void:
 
 
 """ ==== Signal Callbacks ===="""
+#region Signal Bus Callbacks
+func _on_inventory_interacted(p_target: CollisionObject3D, p_inventory: InventoryComponent):
+	print("Player interacted with " + p_target.name)
+
+#endregion
+
+
 #region Health Component Signal Callbacks
 func on_health_component_attack_received(p_health_component: HealthComponent, p_damages: Dictionary, p_total_damage: float, p_attack: Attack):
 	#TODO: Implement this

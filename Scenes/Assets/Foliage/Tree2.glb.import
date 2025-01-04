@@ -3,18 +3,18 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://w4ki27yfeb87"
-path="res://.godot/imported/spear_long_head.gltf-33a97b8ff82f4a25847817aedceec2b2.scn"
+uid="uid://dx75bswpxeldh"
+path="res://.godot/imported/Tree2.glb-d94d5a4bf88ac80146a88a1d28b66672.scn"
 
 [deps]
 
-source_file="res://Scenes/Assets/Models/Items/Weapons/spear_long_head/spear_long_head.gltf"
-dest_files=["res://.godot/imported/spear_long_head.gltf-33a97b8ff82f4a25847817aedceec2b2.scn"]
+source_file="res://Scenes/Assets/Foliage/Tree2.glb"
+dest_files=["res://.godot/imported/Tree2.glb-d94d5a4bf88ac80146a88a1d28b66672.scn"]
 
 [params]
 
-nodes/root_type="Node3D"
-nodes/root_name=""
+nodes/root_type="MeshInstance3D"
+nodes/root_name="Tree2"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
