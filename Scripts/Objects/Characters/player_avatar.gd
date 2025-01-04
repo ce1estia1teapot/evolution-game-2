@@ -1,16 +1,19 @@
 extends Character
 class_name PlayerAvatar
 
-""" ==== World References ==== """
-
 """ ==== CHILD NODES ==== """
 @onready var n_head: Node3D = $Head
 @onready var n_camera: Camera3D = $Head/Camera3D
 @onready var n_collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var n_overhead_detector: ShapeCast3D = $OverheadDetector
-@onready var n_hurt_overlay: TextureRect = $Control/HurtOverlay
+
 @onready var n_health_component: HealthComponent = $Components/HealthComponent
-@onready var n_health_bar: ProgressBar = $Control/HealthBar
+
+@onready var n_player_interface_manager: PlayerInterfaceManager = $PlayerInterfaceManager
+@onready var n_hurt_overlay: TextureRect = $PlayerInterfaceManager/HurtOverlay
+@onready var n_health_bar_hud: HealthBarHUD = $PlayerInterfaceManager/HealthBarHUD
+@onready var n_death_screen_test: Panel = $PlayerInterfaceManager/DeathScreenTest
+
 
 """ ==== SETTINGS ===="""
 @export_category("Player Settings")
@@ -19,7 +22,7 @@ class_name PlayerAvatar
 
 @export_group("Movement")
 @export var speed = 5.0
-@export var acceleration = 16
+@export var movement_acceleration = 16
 @export var jump_velocity = 8
 @export var crouch_height: float = 2.0
 @export var crouch_speed: float = 8.0
@@ -28,9 +31,6 @@ class_name PlayerAvatar
 @export var camera_sensitivity: float = 0.1
 @export var camera_min_angle: float = -80.0
 @export var camera_max_angle: float = 80.0
-
-@export_group("Other")
-@export var hurt_overlay_fadeout_s: float = 0.5
 
 """ ==== Debug Settings ==== """
 var blanket_debug_switch: bool = true
@@ -43,14 +43,25 @@ var m_look_rot: Vector2
 var player_gravity: Vector3
 var stand_height: float
 var old_vel: float = 0.0
-var hurt_tween: Tween
+
+# Flags
+var is_taking_control_input: bool = true
+
+# Tweens
+var attribute_placeholder
 
 """ ==== Built-in Functions ==== """
 #region Built-in Functions
 func _ready() -> void:
-	stand_height = n_collision_shape.shape.height
-	player_gravity = get_gravity()
+	# Signal Connections
+	n_health_component.attack_received.connect(on_health_component_attack_received)
+	n_health_component.health_changed.connect(on_health_component_health_changed)
+	n_health_component.health_is_zero.connect(on_health_component_health_is_zero)
+	n_health_component.knockback_received.connect(on_health_component_knockback_received)
 	
+	# Setting defaults
+	n_health_bar_hud.set_healthbar_value(n_health_component.HEALTH)
+	stand_height = n_collision_shape.shape.height
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	# Updating player data based on WorldState
@@ -60,11 +71,7 @@ func _ready() -> void:
 	else:
 		_update_in_world_state()
 	
-	# Signal Connections
-	n_health_component.attack_received.connect(on_health_component_attack_received)
-	n_health_component.health_changed.connect(on_health_component_health_changed)
-	n_health_component.health_is_zero.connect(on_health_component_health_is_zero)
-	n_health_component.knockback_received.connect(on_health_component_knockback_received)
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -121,11 +128,11 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = lerp(velocity.x, direction.x * speed, acceleration * delta)
-		velocity.z = lerp(velocity.z, direction.z * speed, acceleration * delta)
+		velocity.x = lerp(velocity.x, direction.x * speed, movement_acceleration * delta)
+		velocity.z = lerp(velocity.z, direction.z * speed, movement_acceleration * delta)
 	else:
-		velocity.x = lerp(velocity.x, 0.0, acceleration * delta)
-		velocity.z = lerp(velocity.z, 0.0, acceleration * delta)
+		velocity.x = lerp(velocity.x, 0.0, movement_acceleration * delta)
+		velocity.z = lerp(velocity.z, 0.0, movement_acceleration * delta)
 	
 	move_and_slide()
 	n_head.rotation_degrees.x = m_look_rot.x
@@ -186,18 +193,13 @@ func fall_damage(p_damage: float) -> void:
 	
 	# Send damage to health component
 	n_health_component.apply_damage(p_damage, Enums.DamageTypes.FALL)
-	
-	# Animate damage overlay
-	n_hurt_overlay.modulate = Color.WHITE
-	if hurt_tween:
-		hurt_tween.kill()
-	hurt_tween = self.create_tween()
-	hurt_tween.tween_property(n_hurt_overlay, "modulate", Color.TRANSPARENT, hurt_overlay_fadeout_s)
 
 #endregion
 
+
+
 """ ==== Signal Callbacks ===="""
-#region Signal Callbacks
+#region Health Component Signal Callbacks
 func on_health_component_attack_received(p_health_component: HealthComponent, p_damages: Dictionary, p_total_damage: float, p_attack: Attack):
 	#TODO: Implement this
 	pass
@@ -207,18 +209,25 @@ func on_health_component_health_changed(p_health_component: HealthComponent, p_o
 	This functions handles when the Health value of the player's health component is changed
 	
 	1. Update the value for the player's health in the world state
-	2. Update healthbar
+	2. Tell UI manager to animate properly
 	"""
 	
-	_update_in_world_state()
+	n_player_interface_manager.on_damage_taken(p_new_health)
 	
-	# Must represent the fill as a fraction of the distance between min and max values in the healthbar
-	print("Health bar thinks the health is: {temp_health}".format({"temp_health": p_new_health}))
-	n_health_bar.value = p_new_health
+	# Update in world state
+	_update_in_world_state()
 
 func on_health_component_health_is_zero(p_health_component: HealthComponent) -> void:
-	#TODO: Implement this
-	pass
+	"""
+	Called when the HealthComponent's HEALTH value reaches zero.
+	
+	It should:
+		1. Set is_taking_control_input to 'false'
+		2. Tell the interface_manager to show_death_screen()
+	"""
+	
+	is_taking_control_input = false
+	n_player_interface_manager.show_death_screen()
 
 func on_health_component_knockback_received(p_knockback_force: float) -> void:
 	#TODO: Implement this

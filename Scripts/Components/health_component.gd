@@ -7,29 +7,32 @@ signal knockback_received(knockback_force: float)
 signal health_is_zero(health_component: HealthComponent)
 signal health_changed(health_component: HealthComponent, old_health: float, new_health: float)
 
+@export_group("General")
 # Health
-var HEALTH: float :
+@export var HEALTH: float : 
 	get():
 		return HEALTH
 	set(p_health):
 		# Clamp to reasonable range
-		var health_temp: float = clampf(p_health, 0.0, MAX_HEALTH)
+		var new_health: float = clampf(p_health, 0.0, INF)
+		var old_health: float = HEALTH
 		# Round to 2 decimal places
-		health_temp = round_place(health_temp, 2)
+		new_health = round_place(new_health, 2)
 		
-		self.health_changed.emit(self, HEALTH, health_temp)
+		# Set HEALTH to new value
+		HEALTH = new_health
 		
-		HEALTH = health_temp
+		# Emit signals/messages to alert subscribers of change
 		print("Health changed: {health}".format({"health": HEALTH}))
-		
+		self.health_changed.emit(self, old_health, new_health)
 		# Check for death, emit signal if == 0
 		if HEALTH == 0.0:
 			self.health_is_zero.emit(self)
 			print("You died!")
 
-
-@export_group("General")
-@export var MAX_HEALTH: float = 100.0
+# This flag should be used in the Component's '_ready()' function by a parent to forbid the Component from setting its fields to default on load,
+# preferring to wait for assignment from parent upon pulling world state
+var is_waiting_for_ws_update: bool = false
 
 # Armor
 @export var armor: int = 0
@@ -59,7 +62,7 @@ var upgrades: Array = []
 @export var vulnerabilities: Dictionary
 
 func _ready() -> void:
-	HEALTH = MAX_HEALTH
+	pass
 
 func _modify_damage(p_damage: float, p_type: Enums.DamageTypes) -> float:
 	"""
