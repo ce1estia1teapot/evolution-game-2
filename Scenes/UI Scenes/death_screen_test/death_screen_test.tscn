@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://cn2b2hmhqm1ay"]
+
+[ext_resource type="Theme" uid="uid://l04i7nho1mgc" path="res://Assets/Themes(UI)/ui_theme_test.tres" id="1_67w1f"]
+[ext_resource type="Script" path="res://Scenes/UI Scenes/death_screen_test/death_screen_test.gd" id="2_6lxhq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gu41y"]
+font_size = 156
+font_color = Color(0.55484, 0.0829332, 0.629225, 1)
+
+[node name="death_screen_test" type="Panel"]
+custom_minimum_size = Vector2(0, 423.14)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -327.965
+offset_bottom = 95.175
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_6lxhq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_gu41y")
+horizontal_alignment = 1
+
+[node name="ButtonBox" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 240
+alignment = 1
+
+[node name="RespawnButton" type="Button" parent="VBoxContainer/ButtonBox"]
+custom_minimum_size = Vector2(52.995, 0)
+layout_mode = 2
+theme = ExtResource("1_67w1f")
+keep_pressed_outside = true
+text = "RESPAWN"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/ButtonBox"]
+layout_mode = 2
+theme = ExtResource("1_67w1f")
+keep_pressed_outside = true
+text = "QUIT"

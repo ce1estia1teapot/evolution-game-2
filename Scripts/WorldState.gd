@@ -39,8 +39,11 @@ func update_world_state(p_reporting_node_name: String, p_report: Dictionary) -> 
 		push_warning("Failed to update world state: Node or Report was missing from last call to update_world_state in World.gd")
 	
 	WORLD_STATE[p_reporting_node_name] = p_report
-	
+	print("World state: {ws}".format({"ws": WORLD_STATE}))
 	MainSignalBus.world_state_updated.emit(WORLD_STATE)
+
+func reset_world_state() -> void:
+	WORLD_STATE.clear()
 
 func trim_array(p_array: Array, p_max_length: int) -> Array:
 	var final_array := p_array
