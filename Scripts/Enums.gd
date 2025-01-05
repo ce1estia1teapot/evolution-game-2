@@ -17,11 +17,10 @@ enum HealthStatus {
 	BURNING = 2,
 }
 
-enum InteractionComponentMode{
-	BASIC = 1,
-	WEAPON = 2,
-	DETAILED = 3,
-	MACHINE = 4
+enum InteractionComponentMode {
+	PRIMARY = 1,
+	SECONDARY = 2,
+	TERTIARY = 3,
 }
 
 enum CameraEnum{

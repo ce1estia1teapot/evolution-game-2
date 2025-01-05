@@ -11,14 +11,14 @@ func _physics_process(delta: float) -> void:
 		var collider = get_collider()
 		
 		if collider is InteractComponent:
-			n_prompt.text = collider.interact_prompt_message
+			n_prompt.text = collider.interact_prompt
 		else:
 			n_prompt.text = collider.name
 		
 
-func attempt_interact() -> void:
+func attempt_interact(p_interaction_mode: Enums.InteractionComponentMode) -> void:
 	if is_colliding():
 		var collider = get_collider()
 		
 		if collider is InteractComponent:
-			collider.interact()
+			collider.interact(p_interaction_mode)

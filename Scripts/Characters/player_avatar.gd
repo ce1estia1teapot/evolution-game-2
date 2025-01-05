@@ -169,7 +169,7 @@ func _handle_gameplay_input() -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	elif Input.is_action_just_pressed("interact_primary"):
-		n_interact_ray.attempt_interact()
+		n_interact_ray.attempt_interact(Enums.InteractionComponentMode.PRIMARY)
 
 func _update_in_world_state() -> void:
 	var update_dict: Dictionary = _generate_world_state_dict()

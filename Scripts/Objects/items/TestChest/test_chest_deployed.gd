@@ -7,5 +7,6 @@ extends StaticBody3D
 func _ready() -> void:
 	n_interact_component.interacted.connect(_on_interact_component_interacted)
 
-func _on_interact_component_interacted():
-	PlayerSignalBus.inventory_interacted.emit(self, n_inventory_component)
+func _on_interact_component_interacted(p_interaction_mode: Enums.InteractionComponentMode):
+	if p_interaction_mode == Enums.InteractionComponentMode.PRIMARY:
+		PlayerSignalBus.inventory_interacted.emit(self, n_inventory_component)
