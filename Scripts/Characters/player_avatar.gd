@@ -9,6 +9,7 @@ class_name PlayerAvatar
 
 # Components
 @onready var n_health_component: HealthComponent = $Components/HealthComponent
+@onready var n_inventory_component: InventoryComponent = $Components/InventoryComponent
 
 # UI Stuff
 @onready var n_player_interface_manager: PlayerInterfaceManager = $PlayerInterfaceManager
@@ -54,13 +55,13 @@ var old_vel: float = 0.0
 var is_taking_control_input: bool = true
 
 # Tweens
-var attribute_placeholder
 
 """ ==== Built-in Functions ==== """
 #region Built-in Functions
 func _ready() -> void:
 	# Signal Connections
 	PlayerSignalBus.inventory_interacted.connect(_on_inventory_interacted)
+	PlayerSignalBus.gatherable_collected.connect(_on_gatherable_collected)
 	
 	n_health_component.attack_received.connect(on_health_component_attack_received)
 	n_health_component.health_changed.connect(on_health_component_health_changed)
@@ -146,6 +147,12 @@ func _physics_process(delta: float) -> void:
 	n_head.rotation_degrees.x = m_look_rot.x
 	rotation_degrees.y = m_look_rot.y
 	
+	# Get colliders to apply impulse to rigid bodies
+	for col_idx in get_slide_collision_count():
+		var col := get_slide_collision(col_idx)
+		if col.get_collider() is RigidBody3D:
+			col.get_collider().apply_impulse(-col.get_normal() * 100 * delta, col.get_position() - col.get_collider().global_position)
+	
 	# Fall Damage calculation and application
 	var diff = velocity.y - old_vel
 	if (diff > fall_damage_threshold) and (old_vel < 0):
@@ -214,6 +221,8 @@ func fall_damage(p_damage: float) -> void:
 func _on_inventory_interacted(p_target: CollisionObject3D, p_inventory: InventoryComponent):
 	print("Player interacted with " + p_target.name)
 
+func _on_gatherable_collected(p_item: Item) -> void:
+	print("Collected: " + p_item.item_name)
 #endregion
 
 

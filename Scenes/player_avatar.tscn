@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://btkbb2ifqau8p"]
+[gd_scene load_steps=13 format=3 uid="uid://btkbb2ifqau8p"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/player_avatar.gd" id="1_p8njv"]
 [ext_resource type="Texture2D" uid="uid://befvayb4dc2ym" path="res://Assets/Textures/player_hurt.png" id="2_2qbj6"]
+[ext_resource type="Shape3D" uid="uid://df1m6nw82a1gi" path="res://Resources/Shapes/PlayerBumpDropsShape.tres" id="2_kbk3c"]
 [ext_resource type="PackedScene" uid="uid://dcj5u424fgpkd" path="res://Scenes/Tools/interact_ray.tscn" id="2_mqr44"]
 [ext_resource type="Script" path="res://Scripts/Control Scripts/player_interface_manager.gd" id="3_c74jr"]
 [ext_resource type="PackedScene" uid="uid://r2titniqktfe" path="res://Scenes/Components Scenes/health_component.tscn" id="3_m335w"]
+[ext_resource type="Script" path="res://Scripts/Components/inventory_component.gd" id="4_ktiyf"]
 [ext_resource type="Texture2D" uid="uid://c0mdol6ufr2fc" path="res://Assets/Icons/crosshair_circle.png" id="5_es2o3"]
 [ext_resource type="PackedScene" uid="uid://8o01nwkr3jje" path="res://Scenes/UIScenes/health_bar_hud.tscn" id="5_iha6i"]
 [ext_resource type="PackedScene" uid="uid://cn2b2hmhqm1ay" path="res://Scenes/UIScenes/death_screen_test/DeathScreenTest.tscn" id="6_ayd0b"]
@@ -16,14 +18,12 @@ radius = 0.9
 radius = 1.0
 height = 4.0
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c5x4y"]
-radius = 1.0
-height = 4.0
-
 [node name="PlayerAvatar" type="CharacterBody3D"]
+disable_mode = 1
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_p8njv")
-jump_velocity = 20
+fall_damage_threshold = 10
 
 [node name="OverheadDetector" type="ShapeCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -37,7 +37,7 @@ mesh = SubResource("CapsuleMesh_mh1i1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-shape = SubResource("CapsuleShape3D_c5x4y")
+shape = ExtResource("2_kbk3c")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
@@ -51,6 +51,9 @@ visible = false
 
 [node name="HealthComponent" parent="Components" instance=ExtResource("3_m335w")]
 HEALTH = 100.0
+
+[node name="InventoryComponent" type="Node" parent="Components"]
+script = ExtResource("4_ktiyf")
 
 [node name="PlayerInterfaceManager" type="Control" parent="."]
 layout_mode = 3

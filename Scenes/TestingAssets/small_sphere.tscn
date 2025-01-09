@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvq2d64iji6gf"]
 
-[ext_resource type="Material" uid="uid://c8ns6w80p6v4g" path="res://Assets/GodotMaterials/test_cube_material.tres" id="1_v4fnw"]
+[ext_resource type="Material" uid="uid://c8ns6w80p6v4g" path="res://Assets/Materials/test_cube_material.tres" id="1_v4fnw"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_lw6jk"]
 material = ExtResource("1_v4fnw")

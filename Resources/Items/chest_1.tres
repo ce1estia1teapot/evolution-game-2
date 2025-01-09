@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://b6hb43brhua6k"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/item.gd" id="1_vdg78"]
+
+[resource]
+script = ExtResource("1_vdg78")
+item_name = "Chest"
+item_id = 5
+stack_size = 16
+interact_message = "[E] Open Chest"
+is_interactable = false
+is_equipped = false

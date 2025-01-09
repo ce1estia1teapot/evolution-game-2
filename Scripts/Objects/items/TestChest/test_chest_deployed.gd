@@ -1,4 +1,4 @@
-extends StaticBody3D
+extends DroppedItem
 
 @onready var n_interact_component: InteractComponent = $Components/InteractComponent
 @onready var n_inventory_component: InventoryComponent = $Components/InventoryComponent
@@ -6,6 +6,10 @@ extends StaticBody3D
 
 func _ready() -> void:
 	n_interact_component.interacted.connect(_on_interact_component_interacted)
+	
+	if associated_item:
+		if associated_item.interact_message:
+			n_interact_component.interact_prompt = associated_item.interact_message
 
 func _on_interact_component_interacted(p_interaction_mode: Enums.InteractionComponentMode):
 	if p_interaction_mode == Enums.InteractionComponentMode.PRIMARY:

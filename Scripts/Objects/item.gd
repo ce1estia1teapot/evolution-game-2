@@ -1,4 +1,4 @@
-extends Entity
+extends Resource
 class_name Item
 
 """
@@ -10,20 +10,24 @@ and inserted into inventory.
 """
 
 """ Attributes """
-@export_category("General")
-@export var item_name: String
+@export_group("General")
+@export var item_name: String = "[DEFAULT ITEM NAME]"
 @export var item_id: Enums.ItemID
 @export var stack_size: int = 1
-@export var interact_message: String
+@export var interact_message: String = ""
 
 """ === FLAGS === """
-@export_category("Item Flags")
+@export_group("Item Flags")
 @export var is_interactable = false
 @export var is_equipped = false
 
 """ === Utility Functions """
 #region Utility Functions
-func broadcast_world_state_update():
+func _update_in_world_state() -> void:
+	"""
+	This function is meant to standardize the construction and transmission of 
+	WorldStateReport objects by Entities.
+	"""
 	pass
 
 

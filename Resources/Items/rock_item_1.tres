@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://cpan8qixa81e2"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/item.gd" id="1_g17en"]
+
+[resource]
+script = ExtResource("1_g17en")
+item_name = "Rock"
+item_id = 4
+stack_size = 64
+interact_message = "[E] Collect"
+is_interactable = false
+is_equipped = false

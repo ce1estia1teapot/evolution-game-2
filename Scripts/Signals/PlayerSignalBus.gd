@@ -8,3 +8,4 @@ signal player_attack_initiated(target_hitbox: HitboxComponent, attack: Attack)
 
 """ ==== MISC. SIGNALS ==== """
 signal inventory_interacted(p_target_body: CollisionObject3D, p_inventory: InventoryComponent)
+signal gatherable_collected(p_target: Item)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://nlwx02tg6cfp"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/water_shader_1.gdshader" id="1_lkuqw"]
+[ext_resource type="Shader" path="res://Assets/Shaders/s_portal_water_shader_1.gdshader" id="1_lkuqw"]
 [ext_resource type="Script" path="res://Scripts/Assets/TestingAssets/scene_swap_portal.gd" id="1_psv1v"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mocka"]
