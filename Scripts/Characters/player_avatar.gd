@@ -25,7 +25,9 @@ class_name PlayerAvatar
 """ ==== SETTINGS ===="""
 @export_category("Player Settings")
 @export_group("Gameplay")
-@export var fall_damage_threshold: int = 5
+## Minimum speed in meters/second before the player begins taking damage.
+## After this, fall damage is the difference between player speed and this threshold (scaled for balance)
+@export var fall_damage_threshold: int = 8
 
 @export_group("Movement")
 @export var speed = 5.0
@@ -50,6 +52,8 @@ var m_look_rot: Vector2
 var player_gravity: Vector3
 var stand_height: float
 var old_vel: float = 0.0
+# Used in physics_process to scale applied impulse to simulate greater mass
+var m_rigid_body_mass_max: float = 1000
 
 # Flags
 var is_taking_control_input: bool = true
@@ -150,8 +154,10 @@ func _physics_process(delta: float) -> void:
 	# Get colliders to apply impulse to rigid bodies
 	for col_idx in get_slide_collision_count():
 		var col := get_slide_collision(col_idx)
+		var collider = col.get_collider()
 		if col.get_collider() is RigidBody3D:
-			col.get_collider().apply_impulse(-col.get_normal() * 100 * delta, col.get_position() - col.get_collider().global_position)
+			var force_scale_factor: float = 1 - (collider.mass / m_rigid_body_mass_max)
+			collider.apply_impulse(-col.get_normal() * 100 * delta * force_scale_factor, col.get_position() - collider.global_position)
 	
 	# Fall Damage calculation and application
 	var diff = velocity.y - old_vel

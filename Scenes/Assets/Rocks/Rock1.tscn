@@ -42,9 +42,10 @@ points = PackedVector3Array(0.075012, 0.0148787, 0.93793, 0.687009, 1.06628, 0.1
 radius = 2.046
 
 [node name="Rock1" type="RigidBody3D"]
-transform = Transform3D(-0.00366727, 0.998981, 0.0449763, 0.032083, 0.045071, -0.998469, -0.999479, -0.00221868, -0.0322156, 0, 0, 0)
+transform = Transform3D(-0.001797, 0.489501, 0.022038, 0.0157204, 0.0220844, -0.48925, -0.489745, -0.0010872, -0.0157854, 0, 0, 0)
 collision_layer = 8
 collision_mask = 9
+mass = 2.0
 script = ExtResource("1_whkc7")
 associated_item = ExtResource("2_tvh86")
 
