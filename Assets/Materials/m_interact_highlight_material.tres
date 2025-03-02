@@ -6,6 +6,6 @@
 render_priority = 0
 shader = ExtResource("1_xxvhs")
 shader_parameter/shine_color = Color(1, 1, 1, 1)
-shader_parameter/cycle_interval = 1.0
-shader_parameter/shine_speed = 1.322
-shader_parameter/shine_width = 51.931
+shader_parameter/cycle_interval = 0.744
+shader_parameter/shine_speed = 2.72
+shader_parameter/shine_width = 100.0

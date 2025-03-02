@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://cyd6p4y53druo"]
+
+[ext_resource type="Texture2D" uid="uid://62stepuxi36k" path="res://Assets/MaterialMaker/pbr_wood_planks_1/pbr_wood_planks_1_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://dicutftw6x8w1" path="res://Assets/MaterialMaker/pbr_wood_planks_1/pbr_wood_planks_1_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cib23yjrud4c" path="res://Assets/MaterialMaker/pbr_wood_planks_1/pbr_wood_planks_1_normal.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://vwc43njlqg1k" path="res://Assets/MaterialMaker/pbr_wood_planks_1/pbr_wood_planks_1_heightmap.png" id="4"]
+
+[resource]
+albedo_color = Color(0.589844, 0.589844, 0.589844, 1)
+albedo_texture = ExtResource("1")
+roughness_texture = ExtResource("2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3")
+ao_enabled = true
+ao_texture = ExtResource("2")
+heightmap_enabled = true
+heightmap_scale = 12.5
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("4")
+uv1_scale = Vector3(350, 350, 350)

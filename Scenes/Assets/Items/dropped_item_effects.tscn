@@ -1,0 +1,69 @@
+[gd_scene load_steps=14 format=3 uid="uid://rjhobf8e7yh6"]
+
+[ext_resource type="Script" path="res://Scripts/Assets/dropped_item_effects.gd" id="1_0idpd"]
+[ext_resource type="Shader" uid="uid://hhdc1mqwp7k3" path="res://Assets/Shaders/Material Shaders/vs_item_drop_glow.tres" id="1_c7ho0"]
+[ext_resource type="Texture2D" uid="uid://cei5mwab3qqu6" path="res://Assets/Textures/NoiseTextures/tear_drop_albedo.png" id="2_nka3l"]
+[ext_resource type="PackedScene" uid="uid://dyedm17usnfd5" path="res://Scenes/TestingAssets/test_player.tscn" id="3_liu57"]
+[ext_resource type="Material" uid="uid://bq2r2kxovwbo4" path="res://Assets/Particles/pm_dropped_item_spiral_particles.tres" id="4_dadi1"]
+[ext_resource type="Shader" uid="uid://covlsckmkak2f" path="res://Assets/Particles/sm_dropped_item_vertical_particles.tres" id="6_tlknl"]
+[ext_resource type="Material" uid="uid://c6trlbuh7m3a8" path="res://Assets/Particles/pm_dropped_item_vertical_particles.tres" id="7_6o586"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3s2w7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_utkvt"]
+render_priority = 0
+shader = ExtResource("1_c7ho0")
+shader_parameter/GlowColor = Color(0.03, 1, 3, 1)
+shader_parameter/BlinkRate = 5.0
+shader_parameter/MinBrightness = 0.4
+shader_parameter/MaxBrightness = 1.0
+shader_parameter/GlowShape = ExtResource("2_nka3l")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uafdv"]
+blend_mode = 1
+albedo_color = Color(0.0313726, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3ftma"]
+material = SubResource("StandardMaterial3D_uafdv")
+radius = 0.03
+height = 0.06
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tou2"]
+render_priority = 0
+shader = ExtResource("6_tlknl")
+shader_parameter/ParticlesColor = Color(1, 1, 1, 1)
+shader_parameter/ParticleTexture = ExtResource("2_nka3l")
+
+[sub_resource type="QuadMesh" id="QuadMesh_elvse"]
+
+[node name="DroppedEffects" type="Node3D"]
+script = ExtResource("1_0idpd")
+
+[node name="Glow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+visible = false
+mesh = SubResource("PlaneMesh_3s2w7")
+surface_material_override/0 = SubResource("ShaderMaterial_utkvt")
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("3_liu57")]
+visible = false
+
+[node name="Particles" type="Node3D" parent="."]
+
+[node name="SpiralParticles" type="GPUParticles3D" parent="Particles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.503296, 0)
+amount = 400
+lifetime = 6.0
+preprocess = 0.2
+randomness = 1.0
+fixed_fps = 60
+process_material = ExtResource("4_dadi1")
+draw_pass_1 = SubResource("SphereMesh_3ftma")
+
+[node name="VerticalParticles" type="GPUParticles3D" parent="Particles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.360652, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_4tou2")
+lifetime = 0.39
+process_material = ExtResource("7_6o586")
+draw_pass_1 = SubResource("QuadMesh_elvse")

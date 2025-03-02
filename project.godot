@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Evolution Game"
-run/main_scene="res://addons/proton_scatter/demos/showcase.tscn"
+run/main_scene="res://Scenes/Levels/mansion_level.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
 [autoload]

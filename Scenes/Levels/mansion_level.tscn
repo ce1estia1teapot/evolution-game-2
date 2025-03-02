@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://birs4j67a0n5f"]
+
+[ext_resource type="Material" uid="uid://bl1kyeta7h3dj" path="res://Assets/MaterialMaker/pbr_wood_planks_2/pbr_wood_planks_2.tres" id="1_fhhiy"]
+[ext_resource type="PackedScene" uid="uid://dyedm17usnfd5" path="res://Scenes/TestingAssets/test_player.tscn" id="1_ypr6m"]
+[ext_resource type="PackedScene" uid="uid://cdm0b1s6bxk0c" path="res://Scenes/Assets/Structures/mansion.tscn" id="2_ajyfh"]
+[ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/player_avatar.tscn" id="2_w6gtu"]
+[ext_resource type="PackedScene" uid="uid://djns6tyxxswet" path="res://Scenes/TestingAssets/test_room_1.tscn" id="5_5rpao"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pcvpc"]
+size = Vector3(500.465, 13.335, 539)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kd7b8"]
+data = PackedVector3Array(-250.232, 159.37, 269.5, 250.232, 159.37, 269.5, -250.232, -159.37, 269.5, 250.232, 159.37, 269.5, 250.232, -159.37, 269.5, -250.232, -159.37, 269.5, 250.232, 159.37, -269.5, -250.232, 159.37, -269.5, 250.232, -159.37, -269.5, -250.232, 159.37, -269.5, -250.232, -159.37, -269.5, 250.232, -159.37, -269.5, 250.232, 159.37, 269.5, 250.232, 159.37, -269.5, 250.232, -159.37, 269.5, 250.232, 159.37, -269.5, 250.232, -159.37, -269.5, 250.232, -159.37, 269.5, -250.232, 159.37, -269.5, -250.232, 159.37, 269.5, -250.232, -159.37, -269.5, -250.232, 159.37, 269.5, -250.232, -159.37, 269.5, -250.232, -159.37, -269.5, 250.232, 159.37, 269.5, -250.232, 159.37, 269.5, 250.232, 159.37, -269.5, -250.232, 159.37, 269.5, -250.232, 159.37, -269.5, 250.232, 159.37, -269.5, -250.232, -159.37, 269.5, 250.232, -159.37, 269.5, -250.232, -159.37, -269.5, 250.232, -159.37, 269.5, 250.232, -159.37, -269.5, -250.232, -159.37, -269.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_af4a7"]
+size = Vector3(30.9, 1, 1.86)
+
+[node name="MansionLevel" type="Node"]
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Ground" type="MeshInstance3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.69046, 198.628)
+mesh = SubResource("BoxMesh_pcvpc")
+surface_material_override/0 = ExtResource("1_fhhiy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_kd7b8")
+
+[node name="Fences" type="Node3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 411.38)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Fences"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -293.485)
+mesh = SubResource("BoxMesh_af4a7")
+
+[node name="Mansion" parent="Terrain" instance=ExtResource("2_ajyfh")]
+
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00105703, -24.9937, -0.988071)
+
+[node name="PlayerCharacter" parent="Characters" instance=ExtResource("1_ypr6m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.784292, 1.40212)
+
+[node name="PlayerAvatar" parent="Characters" instance=ExtResource("2_w6gtu")]
+
+[node name="Rooms" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35.9299, 0)
+
+[node name="Room1" parent="Rooms" instance=ExtResource("5_5rpao")]

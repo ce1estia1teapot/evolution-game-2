@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://cdsy3dty6mk7j"]
+
+[ext_resource type="Texture2D" uid="uid://dcre5xaxj528j" path="res://Assets/MaterialMaker/pbr_stone_blocks_stylized_1/pbr_stone_blocks_stylized_1_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://cb4s2lim0bdyh" path="res://Assets/MaterialMaker/pbr_stone_blocks_stylized_1/pbr_stone_blocks_stylized_1_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ksva5vhxohvq" path="res://Assets/MaterialMaker/pbr_stone_blocks_stylized_1/pbr_stone_blocks_stylized_1_normal.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dkmnygjsekckd" path="res://Assets/MaterialMaker/pbr_stone_blocks_stylized_1/pbr_stone_blocks_stylized_1_heightmap.png" id="4"]
+
+[resource]
+albedo_texture = ExtResource("1")
+roughness = 0.35
+roughness_texture = ExtResource("2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3")
+ao_enabled = true
+ao_texture = ExtResource("2")
+heightmap_enabled = true
+heightmap_scale = 14.0
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("4")
+uv1_scale = Vector3(22.312, 4.287, 2.855)
