@@ -3,23 +3,25 @@ class_name PlayerAvatar
 
 """ ==== CHILD NODES ==== """
 # Head parts
-@onready var n_head: Node3D = $Head
-@onready var n_camera: Camera3D = $Head/Camera3D
-@onready var n_interact_ray: InteractRay = $Head/InteractRay
+@onready var n_head : Node3D = $Head
+@onready var n_camera : Camera3D = $Head/Camera3D
+@onready var n_interact_ray : InteractRay = $Head/InteractRay
 
 # Components
-@onready var n_health_component: HealthComponent = $Components/HealthComponent
-@onready var n_inventory_component: InventoryComponent = $Components/InventoryComponent
+@export var r_health_component : HealthComponent
+@export var r_player_stats_component : CharacterStatsComponent
+
+@onready var n_inventory_component : InventoryComponent = $ComponentInstances/InventoryComponent
 
 # UI Stuff
-@onready var n_player_interface_manager: PlayerInterfaceManager = $PlayerInterfaceManager
-@onready var n_hurt_overlay: TextureRect = $PlayerInterfaceManager/HurtOverlay
-@onready var n_health_bar_hud: HealthBarHUD = $PlayerInterfaceManager/HealthBarHUD
-@onready var n_death_screen_test: Panel = $PlayerInterfaceManager/DeathScreenTest
+@onready var n_player_interface_manager : PlayerInterfaceManager = $PlayerInterfaceManager
+@onready var n_hurt_overlay : TextureRect = $PlayerInterfaceManager/HurtOverlay
+@onready var n_health_bar_hud : HealthBarHUD = $PlayerInterfaceManager/HealthBarHUD
+@onready var n_death_screen_test : Panel = $PlayerInterfaceManager/DeathScreenTest
 
 # Misc.
-@onready var n_collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var n_overhead_detector: ShapeCast3D = $OverheadDetector
+@onready var n_collision_shape : CollisionShape3D = $CollisionShape3D
+@onready var n_overhead_detector : ShapeCast3D = $OverheadDetector
 
 
 """ ==== SETTINGS ===="""
@@ -67,13 +69,13 @@ func _ready() -> void:
 	PlayerSignalBus.inventory_interacted.connect(_on_inventory_interacted)
 	PlayerSignalBus.gatherable_collected.connect(_on_gatherable_collected)
 	
-	n_health_component.attack_received.connect(on_health_component_attack_received)
-	n_health_component.health_changed.connect(on_health_component_health_changed)
-	n_health_component.health_is_zero.connect(on_health_component_health_is_zero)
-	n_health_component.knockback_received.connect(on_health_component_knockback_received)
+	r_health_component.attack_received.connect(on_health_component_attack_received)
+	r_health_component.health_changed.connect(on_health_component_health_changed)
+	r_health_component.health_is_zero.connect(on_health_component_health_is_zero)
+	r_health_component.knockback_received.connect(on_health_component_knockback_received)
 	
 	# Setting defaults
-	n_health_bar_hud.set_healthbar_value(n_health_component.HEALTH)
+	n_health_bar_hud.set_healthbar_value(r_health_component.HEALTH)
 	stand_height = n_collision_shape.shape.height
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
@@ -108,7 +110,7 @@ func _parse_world_state_dict(p_dict: Dictionary) -> void:
 	
 	# == Setting Values ==
 	# Health Component Values
-	n_health_component.HEALTH = health
+	r_health_component.HEALTH = health
 
 func _generate_world_state_dict() -> Dictionary:
 	"""
@@ -118,7 +120,7 @@ func _generate_world_state_dict() -> Dictionary:
 	Each component should have a similar method defined
 	"""
 	var report_dict: Dictionary = {
-		Enums.WorldStateKeys.HEALTH : n_health_component.HEALTH
+		Enums.WorldStateKeys.HEALTH : r_health_component.HEALTH
 	}
 	
 	return report_dict
@@ -216,7 +218,7 @@ func fall_damage(p_damage: float) -> void:
 	print("Raw fall damage: {dam}".format({"dam": p_damage}))
 	
 	# Send damage to health component
-	n_health_component.apply_damage(p_damage, Enums.DamageTypes.FALL)
+	r_health_component.apply_damage(p_damage, Enums.DamageTypes.FALL)
 
 #endregion
 

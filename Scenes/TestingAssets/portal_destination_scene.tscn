@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c2cv3fanv2hfl"]
 
 [ext_resource type="Material" uid="uid://dlmtxs0c66hj3" path="res://addons/terrain_3d/demo/assets/materials/M_rock30.tres" id="1_4ok3i"]
-[ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/player_avatar.tscn" id="1_ckqht"]
+[ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/Assets/Characters/player_avatar.tscn" id="1_ckqht"]
 [ext_resource type="PackedScene" uid="uid://nlwx02tg6cfp" path="res://Scenes/TestingAssets/scene_swap_portal.tscn" id="3_n62p8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3slhi"]

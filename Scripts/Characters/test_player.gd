@@ -1,5 +1,5 @@
-#extends Character
-#class_name TestPlayerController
+extends Character
+class_name TestPlayerController
 #
 #""" Child Nodes """
 ##region Child Nodes
@@ -14,7 +14,7 @@
 #@onready var char_stats_component: CharacterStatsComponent = $Components/StatsComponent
 #@onready var pickup_component: PickupComponent = $Components/PickupComponent
 #
-#@onready var spring_arm_pivot: Node3D = $FirstPersonSpringArmPivot
+#@onready var spring_arm_pivot: Node3D  $FirstPersonSpringArmPivot
 #@onready var spring_arm: SpringArm3D = $FirstPersonSpringArmPivot/SpringArm3D
 #@onready var interaction_ray: InteractionRay = $FirstPersonSpringArmPivot/SpringArm3D/FirstPersonCam/InteractionRay
 ##endregion

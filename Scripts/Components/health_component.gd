@@ -1,5 +1,5 @@
 @icon("res://Assets/Icons/notes-medical-solid.svg")
-extends Node
+extends Resource
 class_name HealthComponent
 
 signal attack_received(health_component: HealthComponent, damages: Dictionary, total_damage: float, attack: Attack)

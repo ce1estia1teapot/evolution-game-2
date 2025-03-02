@@ -1,17 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://dyedm17usnfd5"]
+[gd_scene load_steps=12 format=3 uid="uid://dyedm17usnfd5"]
 
 [ext_resource type="PackedScene" uid="uid://dxr3f2t3jj4kw" path="res://Scenes/Assets/Characters/HumanAnimation.glb" id="1_xgj8s"]
 [ext_resource type="Script" path="res://Scripts/Characters/test_player.gd" id="2_eudun"]
-[ext_resource type="Script" path="res://Scripts/Objects/interaction_ray.gd" id="3_cx1g4"]
 [ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerIdleState.gd" id="4_kucbl"]
 [ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerRunningState.gd" id="5_6g0pf"]
-[ext_resource type="PackedScene" uid="uid://r2titniqktfe" path="res://Scenes/Components Scenes/health_component.tscn" id="6_4hinq"]
-[ext_resource type="PackedScene" uid="uid://brxkvy1tn08w" path="res://Scenes/Components Scenes/hitbox_component.tscn" id="7_hbbfm"]
-[ext_resource type="Script" path="res://Scripts/Components/inventory_component.gd" id="8_vg0sf"]
-[ext_resource type="PackedScene" uid="uid://jukh1qirb21p" path="res://Scenes/Assets/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="10_haeml"]
+[ext_resource type="PackedScene" uid="uid://dyokuwp52rmme" path="res://Scenes/Assets/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="10_haeml"]
 [ext_resource type="Script" path="res://Scripts/States/player_state_machine.gd" id="10_ue243"]
-[ext_resource type="Script" path="res://Scripts/Components/pickup_component.gd" id="11_t3ytf"]
-[ext_resource type="PackedScene" uid="uid://dqij0wtv7oorh" path="res://Scenes/Components Scenes/character_stats_component.tscn" id="12_oh2jm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vy1d"]
 radius = 0.501737
@@ -35,12 +29,6 @@ nodes/RunSpeedFraction/node = SubResource("AnimationNodeBlendSpace1D_7drse")
 nodes/RunSpeedFraction/position = Vector2(80, 100)
 nodes/output/position = Vector2(320, 200)
 node_connections = [&"output", 0, &"RunSpeedFraction"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6lpx"]
-radius = 0.675073
-height = 2.17914
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0pnyp"]
 
 [node name="PlayerCharacter" groups=["Player"] instance=ExtResource("1_xgj8s")]
 script = ExtResource("2_eudun")
@@ -66,7 +54,6 @@ target_position = Vector3(0, -1.6, 0)
 collision_mask = 13
 hit_back_faces = false
 collide_with_areas = true
-script = ExtResource("3_cx1g4")
 
 [node name="ThirdPersonSpringArmPivot" type="Node3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.371875, 0.650765)
@@ -87,26 +74,26 @@ collide_with_bodies = false
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-bones/0/position = Vector3(-1.15852e-05, 1.01036, 0.00554889)
-bones/0/rotation = Quaternion(-0.00998077, 0.0110689, -0.00142453, 0.999888)
-bones/2/rotation = Quaternion(-0.119914, 0.129023, 0.929854, -0.323025)
-bones/3/rotation = Quaternion(0.625485, -0.337064, -0.50007, 0.495062)
-bones/4/rotation = Quaternion(0.0481024, 0.102627, 0.992755, -0.0398838)
+bones/0/position = Vector3(0.000172842, 1.00916, 0.00774695)
+bones/0/rotation = Quaternion(-0.0102849, -0.00686973, 0.000643766, 0.999923)
+bones/2/rotation = Quaternion(-0.0889275, 0.240768, 0.923966, -0.283566)
+bones/3/rotation = Quaternion(0.657829, -0.327013, -0.529527, 0.424175)
+bones/4/rotation = Quaternion(0.0669983, 0.00473642, 0.996798, -0.0433895)
 bones/4/scale = Vector3(1.00003, 0.999999, 1)
-bones/5/rotation = Quaternion(-0.215952, -0.00045529, 0.00384608, 0.976396)
-bones/6/rotation = Quaternion(0.610607, 0.0409135, -0.0576062, 0.788776)
+bones/5/rotation = Quaternion(-0.114856, -0.00046321, 0.00204557, 0.99338)
+bones/6/rotation = Quaternion(0.602283, 0.0409241, -0.0577081, 0.795142)
 bones/6/scale = Vector3(1.00001, 1.00001, 1)
-bones/7/rotation = Quaternion(0.16541, -0.184552, 0.88329, 0.397968)
-bones/8/rotation = Quaternion(0.85798, 0.223944, 0.184351, 0.42395)
+bones/7/rotation = Quaternion(0.203919, -0.184275, 0.896949, 0.346328)
+bones/8/rotation = Quaternion(0.886151, 0.250372, 0.229169, 0.315487)
 bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(-0.0723863, 0.0108019, 0.99626, 0.0459229)
+bones/9/rotation = Quaternion(-0.0557346, 0.0389215, 0.9968, 0.0420525)
 bones/9/scale = Vector3(1.00003, 1, 1)
-bones/10/rotation = Quaternion(-0.166678, 0.000459782, -0.00296852, 0.986007)
-bones/11/rotation = Quaternion(0.60894, -0.0478969, 0.0623013, 0.789314)
+bones/10/rotation = Quaternion(-0.149652, 0.000461096, -0.00266527, 0.988735)
+bones/11/rotation = Quaternion(0.564321, -0.0492332, 0.0632543, 0.821655)
 bones/11/scale = Vector3(1.00001, 1.00001, 1)
 
 [node name="HandSocketR" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="1"]
-transform = Transform3D(-0.908615, 0.407702, 0.0905372, 0.153735, 0.124952, 0.98018, 0.388308, 0.904525, -0.176211, -0.405746, 1.34504, -0.0536584)
+transform = Transform3D(-0.877984, 0.416432, -0.236071, -0.0954225, 0.331007, 0.938791, 0.469083, 0.84677, -0.250882, -0.385256, 1.31991, -0.0640201)
 bone_name = "lowerarm.r"
 bone_idx = 8
 
@@ -126,33 +113,7 @@ tree_root = SubResource("AnimationNodeBlendTree_gwmc2")
 anim_player = NodePath("../AnimationPlayer")
 parameters/RunSpeedFraction/blend_position = 0.0998372
 
-[node name="Components" type="Node3D" parent="." index="6"]
-
-[node name="HealthComponent" parent="Components" index="0" instance=ExtResource("6_4hinq")]
-
-[node name="HitboxComponent" parent="Components" index="1" instance=ExtResource("7_hbbfm")]
-visible = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/HitboxComponent" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.959095, 0)
-shape = SubResource("CapsuleShape3D_u6lpx")
-
-[node name="InventoryComponent" type="Node" parent="Components" index="2" node_paths=PackedStringArray("inventory")]
-script = ExtResource("8_vg0sf")
-inventory = [null]
-
-[node name="PickupComponent" type="Area3D" parent="Components" index="3"]
-transform = Transform3D(1.215, 0, 0, 0, 1.215, 0, 0, 0, 1.215, 0, 0.934578, 0)
-visible = false
-script = ExtResource("11_t3ytf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Components/PickupComponent" index="0"]
-shape = SubResource("CapsuleShape3D_0pnyp")
-
-[node name="CharacterStatsComponent" parent="Components" index="4" instance=ExtResource("12_oh2jm")]
-move_speed = 11.325
-
-[node name="PlayerStateMachine" type="Node" parent="." index="7"]
+[node name="PlayerStateMachine" type="Node" parent="." index="6"]
 script = ExtResource("10_ue243")
 
 [node name="PlayerIdleState" type="Node" parent="PlayerStateMachine" index="0"]

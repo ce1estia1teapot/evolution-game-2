@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CharacterStatsComponent" load_steps=2 format=3 uid="uid://bggtht53vuyag"]
+
+[ext_resource type="Script" path="res://Scripts/Components/character_stats_component.gd" id="1_bcf64"]
+
+[resource]
+script = ExtResource("1_bcf64")
+move_speed = 10.0
+max_stamina = 10.0
+stamina = 10.0
+unarmed_damage = 10
+attack_rate = 1

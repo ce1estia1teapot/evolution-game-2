@@ -1,0 +1,106 @@
+[gd_scene load_steps=14 format=3 uid="uid://btkbb2ifqau8p"]
+
+[ext_resource type="Script" path="res://Scripts/Characters/player_avatar.gd" id="1_p8njv"]
+[ext_resource type="Texture2D" uid="uid://befvayb4dc2ym" path="res://Assets/Textures/player_hurt.png" id="2_2qbj6"]
+[ext_resource type="Resource" uid="uid://chvq0o257oj2r" path="res://Resources/Components/player_components/player_health_component.tres" id="2_jes07"]
+[ext_resource type="Shape3D" uid="uid://df1m6nw82a1gi" path="res://Resources/Shapes/PlayerBumpDropsShape.tres" id="2_kbk3c"]
+[ext_resource type="PackedScene" uid="uid://dcj5u424fgpkd" path="res://Scenes/Tools/interact_ray.tscn" id="2_mqr44"]
+[ext_resource type="Script" path="res://Scripts/Control Scripts/player_interface_manager.gd" id="3_c74jr"]
+[ext_resource type="Resource" uid="uid://bggtht53vuyag" path="res://Resources/Components/player_components/player_stats_component.tres" id="3_jua2e"]
+[ext_resource type="PackedScene" uid="uid://b4m31vcs1k7re" path="res://Scenes/Components Scenes/inventory_component.tscn" id="4_kjxyi"]
+[ext_resource type="Texture2D" uid="uid://c0mdol6ufr2fc" path="res://Assets/Icons/crosshair_circle.png" id="5_es2o3"]
+[ext_resource type="PackedScene" uid="uid://8o01nwkr3jje" path="res://Scenes/UIScenes/health_bar_hud.tscn" id="5_iha6i"]
+[ext_resource type="PackedScene" uid="uid://cn2b2hmhqm1ay" path="res://Scenes/UIScenes/death_screen_test/DeathScreenTest.tscn" id="6_ayd0b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_05lce"]
+radius = 0.9
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_mh1i1"]
+radius = 1.0
+height = 4.0
+
+[node name="PlayerAvatar" type="CharacterBody3D"]
+disable_mode = 1
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_p8njv")
+n_health_component = ExtResource("2_jes07")
+n_player_stats_component = ExtResource("3_jua2e")
+fall_damage_threshold = 10
+speed = null
+movement_acceleration = null
+jump_velocity = null
+crouch_height = null
+crouch_speed = null
+camera_sensitivity = null
+camera_min_angle = null
+camera_max_angle = null
+
+[node name="OverheadDetector" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("SphereShape3D_05lce")
+target_position = Vector3(0, 1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_mh1i1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = ExtResource("2_kbk3c")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="InteractRay" parent="Head" instance=ExtResource("2_mqr44")]
+visible = false
+
+[node name="ComponentInstances" type="Node" parent="."]
+
+[node name="InventoryComponent" parent="ComponentInstances" instance=ExtResource("4_kjxyi")]
+
+[node name="PlayerInterfaceManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("3_c74jr")
+
+[node name="Crosshair" type="TextureRect" parent="PlayerInterfaceManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.301
+offset_right = 12.301
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_es2o3")
+
+[node name="HealthBarHUD" parent="PlayerInterfaceManager" instance=ExtResource("5_iha6i")]
+layout_mode = 1
+mouse_filter = 2
+
+[node name="DeathScreenTest" parent="PlayerInterfaceManager" instance=ExtResource("6_ayd0b")]
+visible = false
+layout_mode = 1
+offset_top = 0.0
+offset_bottom = 0.0
+mouse_filter = 2
+
+[node name="HurtOverlay" type="TextureRect" parent="PlayerInterfaceManager"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_2qbj6")

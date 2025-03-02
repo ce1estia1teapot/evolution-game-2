@@ -1,19 +1,45 @@
-[gd_scene load_steps=9 format=3 uid="uid://birs4j67a0n5f"]
+[gd_scene load_steps=15 format=3 uid="uid://birs4j67a0n5f"]
 
 [ext_resource type="Material" uid="uid://bl1kyeta7h3dj" path="res://Assets/MaterialMaker/pbr_wood_planks_2/pbr_wood_planks_2.tres" id="1_fhhiy"]
-[ext_resource type="PackedScene" uid="uid://dyedm17usnfd5" path="res://Scenes/TestingAssets/test_player.tscn" id="1_ypr6m"]
 [ext_resource type="PackedScene" uid="uid://cdm0b1s6bxk0c" path="res://Scenes/Assets/Structures/mansion.tscn" id="2_ajyfh"]
-[ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/player_avatar.tscn" id="2_w6gtu"]
+[ext_resource type="PackedScene" uid="uid://btkbb2ifqau8p" path="res://Scenes/Assets/Characters/player_avatar.tscn" id="2_w6gtu"]
+[ext_resource type="Resource" uid="uid://chvq0o257oj2r" path="res://Resources/Components/player_components/player_health_component.tres" id="4_uh0rs"]
 [ext_resource type="PackedScene" uid="uid://djns6tyxxswet" path="res://Scenes/TestingAssets/test_room_1.tscn" id="5_5rpao"]
+[ext_resource type="Resource" uid="uid://bggtht53vuyag" path="res://Resources/Components/player_components/player_stats_component.tres" id="5_ximtj"]
+[ext_resource type="PackedScene" uid="uid://cj0fuaa4yxw7v" path="res://Scenes/Levels/wizard_mansion_sublevels/practice_range_scene.tscn" id="6_720ki"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_pcvpc"]
 size = Vector3(500.465, 13.335, 539)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_kd7b8"]
-data = PackedVector3Array(-250.232, 159.37, 269.5, 250.232, 159.37, 269.5, -250.232, -159.37, 269.5, 250.232, 159.37, 269.5, 250.232, -159.37, 269.5, -250.232, -159.37, 269.5, 250.232, 159.37, -269.5, -250.232, 159.37, -269.5, 250.232, -159.37, -269.5, -250.232, 159.37, -269.5, -250.232, -159.37, -269.5, 250.232, -159.37, -269.5, 250.232, 159.37, 269.5, 250.232, 159.37, -269.5, 250.232, -159.37, 269.5, 250.232, 159.37, -269.5, 250.232, -159.37, -269.5, 250.232, -159.37, 269.5, -250.232, 159.37, -269.5, -250.232, 159.37, 269.5, -250.232, -159.37, -269.5, -250.232, 159.37, 269.5, -250.232, -159.37, 269.5, -250.232, -159.37, -269.5, 250.232, 159.37, 269.5, -250.232, 159.37, 269.5, 250.232, 159.37, -269.5, -250.232, 159.37, 269.5, -250.232, 159.37, -269.5, 250.232, 159.37, -269.5, -250.232, -159.37, 269.5, 250.232, -159.37, 269.5, -250.232, -159.37, -269.5, 250.232, -159.37, 269.5, 250.232, -159.37, -269.5, -250.232, -159.37, -269.5)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2omob"]
+points = PackedVector3Array(250.232, 6.6675, 269.5, 250.232, -6.6675, 269.5, 250.232, 6.6675, -269.5, -250.232, 6.6675, 269.5, -250.232, -6.6675, 269.5, 250.232, -6.6675, -269.5, -250.232, 6.6675, -269.5, -250.232, -6.6675, -269.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_af4a7"]
 size = Vector3(30.9, 1, 1.86)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7bguy"]
+sky_top_color = Color(0, 0.452355, 0.807335, 1)
+sky_horizon_color = Color(0.436956, 0.694828, 0.815013, 1)
+sky_curve = 0.117688
+ground_horizon_color = Color(0.411405, 0.420753, 0.43551, 1)
+energy_multiplier = 2.59
+
+[sub_resource type="Sky" id="Sky_ghlnu"]
+sky_material = SubResource("ProceduralSkyMaterial_7bguy")
+
+[sub_resource type="Environment" id="Environment_hfk42"]
+background_mode = 2
+sky = SubResource("Sky_ghlnu")
+reflected_light_source = 2
+tonemap_mode = 2
+fog_light_energy = 1.81
+fog_density = 0.0133
+fog_sky_affect = 0.558
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_x5jd1"]
+auto_exposure_enabled = true
+dof_blur_far_distance = 27.59
+dof_blur_amount = 0.07
 
 [node name="MansionLevel" type="Node"]
 
@@ -27,7 +53,7 @@ surface_material_override/0 = ExtResource("1_fhhiy")
 [node name="StaticBody3D" type="StaticBody3D" parent="Terrain/Ground"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_kd7b8")
+shape = SubResource("ConvexPolygonShape3D_2omob")
 
 [node name="Fences" type="Node3D" parent="Terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 411.38)
@@ -38,15 +64,28 @@ mesh = SubResource("BoxMesh_af4a7")
 
 [node name="Mansion" parent="Terrain" instance=ExtResource("2_ajyfh")]
 
-[node name="Characters" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00105703, -24.9937, -0.988071)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, -0.309017, 0.951056, 0, -0.951056, -0.309017, -4.13132, 89.053, -48.0982)
+light_bake_mode = 1
 
-[node name="PlayerCharacter" parent="Characters" instance=ExtResource("1_ypr6m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.784292, 1.40212)
+[node name="Characters" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.9597, 0.57848, -69.74)
 
 [node name="PlayerAvatar" parent="Characters" instance=ExtResource("2_w6gtu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.326688, -2.72239)
+r_health_component = ExtResource("4_uh0rs")
+r_player_stats_component = ExtResource("5_ximtj")
 
 [node name="Rooms" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35.9299, 0)
 
 [node name="Room1" parent="Rooms" instance=ExtResource("5_5rpao")]
+
+[node name="PracticeRange" type="Node3D" parent="Rooms"]
+
+[node name="practice range" parent="Rooms/PracticeRange" instance=ExtResource("6_720ki")]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 37.3916, 30.931, -84.4802)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hfk42")
+camera_attributes = SubResource("CameraAttributesPractical_x5jd1")

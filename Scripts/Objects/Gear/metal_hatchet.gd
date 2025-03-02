@@ -1,5 +1,5 @@
 extends DroppedItem
-class_name MetalHatchet
+class_name MetalHatchetDrop
 
 """ Grabbing components on ready... """
 @onready var m_hitbox_comp: HitboxComponent = $Components/HitboxComponent
