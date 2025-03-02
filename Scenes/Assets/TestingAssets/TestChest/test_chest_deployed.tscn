@@ -27,6 +27,7 @@ shape = SubResource("ConvexPolygonShape3D_gsnjf")
 [node name="Components" type="Node3D" parent="."]
 
 [node name="InteractComponent" parent="Components" instance=ExtResource("1_kylvf")]
+interact_prompt = "beez"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Components/InteractComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

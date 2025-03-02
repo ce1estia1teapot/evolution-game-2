@@ -102,6 +102,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.7765, 1, -5)
 [node name="EnvironmentAssets" type="Node3D" parent="."]
 
 [node name="Ground" type="MeshInstance3D" parent="EnvironmentAssets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.64883, -0.0634332, 2.42827)
 mesh = SubResource("PlaneMesh_qjd5u")
 skeleton = NodePath("../..")
 
@@ -114,15 +115,15 @@ shape = SubResource("ConcavePolygonShape3D_yjr35")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.34541, 0.425063, -4.55136)
 
 [node name="Walls" type="Node3D" parent="EnvironmentAssets"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.56704, 0.789192, -47.7513)
 
 [node name="TestWall" parent="EnvironmentAssets/Walls" instance=ExtResource("4_j4mcv")]
 
 [node name="TestWall2" parent="EnvironmentAssets/Walls" instance=ExtResource("4_j4mcv")]
-transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 100)
+transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 100.173)
 
 [node name="TestWall3" parent="EnvironmentAssets/Walls" instance=ExtResource("4_j4mcv")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 4, 0, -1, 0, -4.37114e-08, 50, 0, 50)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 4, 0, -1, 0, -4.37114e-08, 50.0256, -0.132492, 50.0629)
 
 [node name="TestWall4" parent="EnvironmentAssets/Walls" instance=ExtResource("4_j4mcv")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 4, 0, -1, 0, -4.37114e-08, -50, 0, 50)
