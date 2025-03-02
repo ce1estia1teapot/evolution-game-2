@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://c8l2qsmtyujhg"
+=======
+uid="uid://bc13yeyhnefxh"
+>>>>>>> 8261d8ba21704663f12f483d86dfaec8007a4232
 path="res://.godot/imported/bricks_stylized_1_albedo.png-a806293594e68dbb0c9d63905e13a681.ctex"
 metadata={
 "vram_texture": false

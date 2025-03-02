@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://y8edsjvmqqe7"
+=======
+uid="uid://cpamlmnay6bcp"
+>>>>>>> 8261d8ba21704663f12f483d86dfaec8007a4232
 path="res://.godot/imported/glass_stained_1_normal.png-7296ac55da84fb758f0774eb9bae82e1.ctex"
 metadata={
 "vram_texture": false

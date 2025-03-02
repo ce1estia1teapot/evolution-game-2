@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://dwb3vi3oek15w"
+=======
+uid="uid://c61sxrajoqmpm"
+>>>>>>> 8261d8ba21704663f12f483d86dfaec8007a4232
 path="res://.godot/imported/albedo.png-063c063386733c7620869be90f75bc2c.ctex"
 metadata={
 "vram_texture": false

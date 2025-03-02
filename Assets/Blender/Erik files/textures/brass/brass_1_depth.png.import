@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://bs4s35ftlgckp"
+=======
+uid="uid://ccj3v3sklu74e"
+>>>>>>> 8261d8ba21704663f12f483d86dfaec8007a4232
 path="res://.godot/imported/brass_1_depth.png-2a2b387a9fe84e3ab09da327285bad79.ctex"
 metadata={
 "vram_texture": false
