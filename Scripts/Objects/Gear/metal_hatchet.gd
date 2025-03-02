@@ -1,4 +1,4 @@
-extends Item
+extends DroppedItem
 class_name MetalHatchet
 
 """ Grabbing components on ready... """

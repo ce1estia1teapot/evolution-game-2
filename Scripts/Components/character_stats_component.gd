@@ -1,5 +1,5 @@
 @icon("res://Assets/Icons/chart-simple-solid.svg")
-extends Node
+extends Resource
 class_name CharacterStatsComponent
 
 # Movement

@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://vugbcw2kq0gx"]
+
+[ext_resource type="ArrayMesh" uid="uid://tawtj0dacdur" path="res://Assets/Meshes/wood plank.obj" id="1_1l4h8"]
+[ext_resource type="Material" uid="uid://ugbqpal7igsf" path="res://Assets/Materials/m_interact_highlight_material.tres" id="2_dmn54"]
+[ext_resource type="PackedScene" uid="uid://rjhobf8e7yh6" path="res://Scenes/Assets/Items/dropped_item_effects.tscn" id="2_k3fjc"]
+[ext_resource type="Shader" uid="uid://h5nuyjg0yu3h" path="res://Assets/Shaders/Material Shaders/vs_wood_plank.tres" id="3_ltju7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w22qn"]
+render_priority = 0
+next_pass = ExtResource("2_dmn54")
+shader = ExtResource("3_ltju7")
+shader_parameter/Color = Color(0.573366, 0.398242, 0.198078, 1)
+shader_parameter/Roughness = 0.0
+
+[sub_resource type="Animation" id="Animation_l4fa3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.802851, -1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rxr78"]
+resource_name = "float"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.802851, -1.5708, 0), Vector3(-0.802851, 1.5708, 0), Vector3(-0.802851, 4.71239, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qtgc0"]
+_data = {
+"RESET": SubResource("Animation_l4fa3"),
+"float": SubResource("Animation_rxr78")
+}
+
+[node name="DroppedPlank" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165973, 0)
+
+[node name="MeshPivot" type="Node3D" parent="."]
+transform = Transform3D(-4.88699e-07, 0.0971108, -0.0937789, 0, 0.0937789, 0.0971109, 0.135, 3.5154e-07, -3.39479e-07, -0.107, 0.324106, -0.130381)
+
+[node name="BoardMesh" type="MeshInstance3D" parent="MeshPivot"]
+transform = Transform3D(1, -2.98023e-08, 1.78814e-07, 0, 1, -4.47035e-08, 0, -1.49012e-07, 1, 0.810202, -3.65233, 36.0895)
+mesh = ExtResource("1_1l4h8")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_w22qn")
+
+[node name="Effects" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.504936, 0)
+
+[node name="DroppedEffects" parent="Effects" instance=ExtResource("2_k3fjc")]
+transform = Transform3D(1.71, 0, 0, 0, 1.71, 0, 0, 0, 1.71, -0.000291169, 0.00216448, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qtgc0")
+}
+autoplay = "float"
+speed_scale = 0.25

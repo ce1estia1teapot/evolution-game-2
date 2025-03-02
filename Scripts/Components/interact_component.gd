@@ -27,6 +27,8 @@ SUMMARY:
 signal interacted(p_interaction_mode: Enums.InteractionComponentMode)
 
 @export var interact_prompt: String = ""
+## Intended to mark whether the parent body is gatherable (like a stick or rock) in which case interact behavior may be defined here
+## in the component
 
 func interact(p_interaction_mode: Enums.InteractionComponentMode) -> void:
 	

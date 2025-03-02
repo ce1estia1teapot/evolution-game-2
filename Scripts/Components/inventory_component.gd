@@ -8,6 +8,7 @@ class_name InventoryComponent
 ## An array containing all upgrades applied to this inventory component
 @export var upgrades: Array = []
 
+
 func retrieve_item_quantity(p_item: Item) -> int:
 	"""
 	Returns the quantity of the provided item in the inventory.

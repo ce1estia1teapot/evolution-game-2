@@ -9,6 +9,7 @@ class_name PlayerAvatar
 
 # Components
 @onready var n_health_component: HealthComponent = $Components/HealthComponent
+@onready var n_inventory_component: InventoryComponent = $Components/InventoryComponent
 
 # UI Stuff
 @onready var n_player_interface_manager: PlayerInterfaceManager = $PlayerInterfaceManager
@@ -24,7 +25,9 @@ class_name PlayerAvatar
 """ ==== SETTINGS ===="""
 @export_category("Player Settings")
 @export_group("Gameplay")
-@export var fall_damage_threshold: int = 5
+## Minimum speed in meters/second before the player begins taking damage.
+## After this, fall damage is the difference between player speed and this threshold (scaled for balance)
+@export var fall_damage_threshold: int = 8
 
 @export_group("Movement")
 @export var speed = 5.0
@@ -49,18 +52,20 @@ var m_look_rot: Vector2
 var player_gravity: Vector3
 var stand_height: float
 var old_vel: float = 0.0
+# Used in physics_process to scale applied impulse to simulate greater mass
+var m_rigid_body_mass_max: float = 1000
 
 # Flags
 var is_taking_control_input: bool = true
 
 # Tweens
-var attribute_placeholder
 
 """ ==== Built-in Functions ==== """
 #region Built-in Functions
 func _ready() -> void:
 	# Signal Connections
 	PlayerSignalBus.inventory_interacted.connect(_on_inventory_interacted)
+	PlayerSignalBus.gatherable_collected.connect(_on_gatherable_collected)
 	
 	n_health_component.attack_received.connect(on_health_component_attack_received)
 	n_health_component.health_changed.connect(on_health_component_health_changed)
@@ -146,6 +151,14 @@ func _physics_process(delta: float) -> void:
 	n_head.rotation_degrees.x = m_look_rot.x
 	rotation_degrees.y = m_look_rot.y
 	
+	# Get colliders to apply impulse to rigid bodies
+	for col_idx in get_slide_collision_count():
+		var col := get_slide_collision(col_idx)
+		var collider = col.get_collider()
+		if col.get_collider() is RigidBody3D:
+			var force_scale_factor: float = 1 - (collider.mass / m_rigid_body_mass_max)
+			collider.apply_impulse(-col.get_normal() * 100 * delta * force_scale_factor, col.get_position() - collider.global_position)
+	
 	# Fall Damage calculation and application
 	var diff = velocity.y - old_vel
 	if (diff > fall_damage_threshold) and (old_vel < 0):
@@ -214,6 +227,8 @@ func fall_damage(p_damage: float) -> void:
 func _on_inventory_interacted(p_target: CollisionObject3D, p_inventory: InventoryComponent):
 	print("Player interacted with " + p_target.name)
 
+func _on_gatherable_collected(p_item: Item) -> void:
+	print("Collected: " + p_item.item_name)
 #endregion
 
 

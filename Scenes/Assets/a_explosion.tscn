@@ -1,11 +1,11 @@
 [gd_scene load_steps=45 format=3 uid="uid://dqfh00pguwqa"]
 
-[ext_resource type="Material" uid="uid://cej56aqewovsm" path="res://Assets/GodotMaterials/m_explosive_cloud.tres" id="1_03ayv"]
-[ext_resource type="Shader" uid="uid://mgmi8b5wdt58" path="res://Assets/Shaders/s_explosion_streaks.tres" id="2_116ub"]
+[ext_resource type="Material" uid="uid://cej56aqewovsm" path="res://Assets/Materials/sm_explosive_cloud.tres" id="1_03ayv"]
+[ext_resource type="Shader" uid="uid://mgmi8b5wdt58" path="res://Assets/Shaders/vs_explosion_streaks.tres" id="2_116ub"]
 [ext_resource type="Texture2D" uid="uid://cuhh5jea5k5te" path="res://Assets/Textures/NoiseTextures/T_vfx_hit122.jpg" id="3_80lyb"]
 [ext_resource type="Texture2D" uid="uid://cqlmxtn5hotqg" path="res://Assets/Textures/NoiseTextures/T_cracks35.png" id="4_6uxip"]
 [ext_resource type="Texture2D" uid="uid://cu4osecoe4766" path="res://Assets/Textures/NoiseTextures/T_cracks33_E3.jpg" id="5_jglll"]
-[ext_resource type="Shader" uid="uid://dqc8cdbrnnu4t" path="res://Assets/Shaders/s_shockwave.tres" id="6_gbuqh"]
+[ext_resource type="Shader" uid="uid://dqc8cdbrnnu4t" path="res://Assets/Shaders/vs_shockwave.tres" id="6_gbuqh"]
 
 [sub_resource type="Curve" id="Curve_5ikdl"]
 _data = [Vector2(0.391304, 0.010989), 0.0, 0.0, 0, 0, Vector2(1, 0.857143), 0.0, 0.0, 0, 0]

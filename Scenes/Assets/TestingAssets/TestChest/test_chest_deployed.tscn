@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjspnmao3w0bc"]
+[gd_scene load_steps=8 format=3 uid="uid://bjspnmao3w0bc"]
 
 [ext_resource type="Script" path="res://Scripts/Objects/items/TestChest/test_chest_deployed.gd" id="1_58mpt"]
 [ext_resource type="PackedScene" uid="uid://ct6awo8mfhcc4" path="res://Scenes/Components Scenes/interact_component.tscn" id="1_kylvf"]
+[ext_resource type="Resource" uid="uid://b6hb43brhua6k" path="res://Resources/Items/chest_1.tres" id="2_weg6g"]
 [ext_resource type="PackedScene" uid="uid://b4m31vcs1k7re" path="res://Scenes/Components Scenes/inventory_component.tscn" id="3_7t60g"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_y070o"]
@@ -13,8 +14,11 @@ points = PackedVector3Array(1.25, 0.75, 0.5, 1.25, 0.75, -0.5, -1.25, 0.75, 0.5,
 [sub_resource type="BoxShape3D" id="BoxShape3D_8t0yk"]
 size = Vector3(3.055, 1.975, 1.68)
 
-[node name="TestChestDeployed" type="StaticBody3D"]
+[node name="TestChestDeployed" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 9
 script = ExtResource("1_58mpt")
+associated_item = ExtResource("2_weg6g")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

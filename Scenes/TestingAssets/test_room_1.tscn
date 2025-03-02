@@ -1,0 +1,155 @@
+[gd_scene format=3 uid="uid://djns6tyxxswet"]
+
+[node name="Room1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.6645, 0)
+
+[node name="Room" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.33195, 0)
+use_collision = true
+collision_mask = 0
+flip_faces = true
+size = Vector3(10, 5.255, 10)
+
+[node name="Desk" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.46013, -4.14632, -0.835602)
+use_collision = true
+collision_mask = 0
+
+[node name="Surface" type="CSGBox3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83835, 0.180399, -1.16144)
+size = Vector3(1, 0.115, 2)
+
+[node name="Leg1" type="CSGBox3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39803, -0.341904, -0.217193)
+size = Vector3(0.045, 1, 0.055)
+
+[node name="Leg2" type="CSGBox3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27541, -0.341904, -0.226039)
+size = Vector3(0.045, 1, 0.055)
+
+[node name="Leg3" type="CSGBox3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27541, -0.341904, -2.09518)
+size = Vector3(0.045, 1, 0.055)
+
+[node name="Leg4" type="CSGBox3D" parent="Desk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.39879, -0.341904, -2.09518)
+size = Vector3(0.045, 1, 0.055)
+
+[node name="Bed" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.871, 0, 0, 0, 0.74, 0, 0, 0, 0.871, 0, -4.32998, -2.667)
+
+[node name="Frame" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.373058, 0)
+size = Vector3(2.26, 1, 3.91)
+
+[node name="Mattress" type="CSGBox3D" parent="Bed"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.237764, 0)
+size = Vector3(2.005, 1, 3.67)
+
+[node name="Pillow" type="CSGCombiner3D" parent="Bed"]
+transform = Transform3D(1.24, 0, 0, 0, 0.63, 0, 0, 0, 1, -0.392735, -0.112125, -0.249822)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Bed/Pillow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44404, -1.06284)
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Bed/Pillow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.304439, 0.44404, -1.06284)
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Bed/Pillow"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.612613, 0.44404, -1.06284)
+
+[node name="Lamp" type="CSGCombiner3D" parent="."]
+transform = Transform3D(0.81, 0, 0, 0, 0.81, 0, 0, 0, 0.81, 3.7785, -4.91084, -3.86414)
+
+[node name="Base" type="CSGCylinder3D" parent="Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0869169, 0)
+radius = 0.35
+height = 0.402
+sides = 19
+cone = true
+
+[node name="Pole" type="CSGCylinder3D" parent="Lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21479, 0)
+radius = 0.038
+height = 1.999
+
+[node name="Lampshade" type="CSGPolygon3D" parent="Lamp"]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.0043664, 1.88745, -0.00944734)
+polygon = PackedVector2Array(-1, 0, 0, 2, 1, 2, 2, 0)
+mode = 1
+spin_degrees = 360.0
+spin_sides = 8
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lamp"]
+transform = Transform3D(1.23457, 0, 0, 0, 1.23457, 0, 0, 0, 1.23457, -0.02177, 2.61885, -0.0188241)
+omni_range = 4.65797
+omni_attenuation = 0.479
+
+[node name="Bookshelf" type="CSGCombiner3D" parent="."]
+
+[node name="Exterior" type="CSGBox3D" parent="Bookshelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4603, -3.34115, 0)
+size = Vector3(1, 3.225, 2.035)
+
+[node name="Interior" type="CSGBox3D" parent="Bookshelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3255, -3.34115, 0)
+operation = 2
+size = Vector3(0.77, 3.06, 1.8)
+
+[node name="Shelf1" type="CSGBox3D" parent="Bookshelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45412, -2.34625, 0.000151277)
+size = Vector3(0.972, 0.049, 1.809)
+
+[node name="Shelf2" type="CSGBox3D" parent="Bookshelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45412, -2.95765, 0.000151277)
+size = Vector3(0.972, 0.049, 1.809)
+
+[node name="Shelf3" type="CSGBox3D" parent="Bookshelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45412, -3.5768, 0.000151277)
+size = Vector3(0.972, 0.049, 1.809)
+
+[node name="Shelf4" type="CSGBox3D" parent="Bookshelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45412, -4.22346, 0.000151277)
+size = Vector3(0.972, 0.049, 1.809)
+
+[node name="Doorway" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1.48, 0, 0, 0, 1.48, 0, 0, 0, 1.48, 0, -3.01977, 4.82475)
+
+[node name="DoorFrame" type="CSGCombiner3D" parent="Doorway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.675, -4.87)
+
+[node name="DoorframeExterior" type="CSGBox3D" parent="Doorway/DoorFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.79815, 4.90367)
+size = Vector3(1.517, 2.31, 0.205)
+
+[node name="DoorframeInterior" type="CSGBox3D" parent="Doorway/DoorFrame"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.86656, 4.90367)
+operation = 2
+size = Vector3(1.343, 2.23807, 0.205)
+
+[node name="Door" type="CSGCombiner3D" parent="Doorway"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.675, -4.87)
+
+[node name="DoorBody" type="CSGBox3D" parent="Doorway/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00256217, -3.84929, 4.90367)
+size = Vector3(1.29877, 2.16771, 0.205)
+
+[node name="DoorCutout1" type="CSGBox3D" parent="Doorway/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.285892, -3.27847, 4.78096)
+operation = 2
+size = Vector3(0.444, 0.719, 0.073)
+
+[node name="DoorCutout2" type="CSGBox3D" parent="Doorway/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293114, -3.27847, 4.78096)
+operation = 2
+size = Vector3(0.444, 0.719, 0.073)
+
+[node name="DoorCutout3" type="CSGBox3D" parent="Doorway/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.285892, -4.24841, 4.78096)
+operation = 2
+size = Vector3(0.444, 0.719, 0.073)
+
+[node name="DoorCutout4" type="CSGBox3D" parent="Doorway/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293114, -4.24841, 4.78096)
+operation = 2
+size = Vector3(0.444, 0.719, 0.073)

@@ -1,0 +1,56 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=11 format=3 uid="uid://bq2r2kxovwbo4"]
+
+[sub_resource type="Curve" id="Curve_5q76o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.735032), 1.85123, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_3lvap"]
+curve_y = SubResource("Curve_5q76o")
+
+[sub_resource type="Curve" id="Curve_koo21"]
+max_value = 2.0
+_data = [Vector2(0.654952, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_iuud4"]
+min_value = -2.0
+max_value = 2.0
+_data = [Vector2(0, -2), 0.0, 0.0, 0, 0, Vector2(1, -1.67643), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4sxqa"]
+max_value = 2.0
+_data = [Vector2(0.402556, 0), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_d7fu0"]
+curve_x = SubResource("Curve_koo21")
+curve_y = SubResource("Curve_iuud4")
+curve_z = SubResource("Curve_4sxqa")
+
+[sub_resource type="Curve" id="Curve_2wkwa"]
+_data = [Vector2(0, 0.205096), 0.0, 0.0, 0, 0, Vector2(0.645367, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l56o3"]
+curve = SubResource("Curve_2wkwa")
+
+[sub_resource type="Curve" id="Curve_ptm67"]
+_data = [Vector2(0, 0.0394905), 0.0, 0.0, 0, 0, Vector2(1, 0.312739), -0.0462805, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_sflhj"]
+curve = SubResource("Curve_ptm67")
+
+[resource]
+directional_velocity_min = -1.60933e-05
+directional_velocity_max = -1.60933e-05
+directional_velocity_curve = SubResource("CurveXYZTexture_3lvap")
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 1.0
+orbit_velocity_curve = SubResource("CurveXYZTexture_d7fu0")
+radial_velocity_min = 0.0999776
+radial_velocity_max = 0.499978
+radial_velocity_curve = SubResource("CurveTexture_l56o3")
+gravity = Vector3(0, 0.1, 0)
+scale_curve = SubResource("CurveTexture_sflhj")

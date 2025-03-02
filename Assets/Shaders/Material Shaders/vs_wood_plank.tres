@@ -1,0 +1,41 @@
+[gd_resource type="VisualShader" load_steps=3 format=3 uid="uid://h5nuyjg0yu3h"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_pgae6"]
+parameter_name = "Color"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_pfeii"]
+parameter_name = "Roughness"
+hint = 2
+default_value_enabled = true
+default_value = 0.8
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec4 Color : source_color;
+uniform float Roughness : hint_range(0, 1, 0.10000000149012) = 0.80000001192093;
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = Color;
+
+
+// FloatParameter:3
+	float n_out3p0 = Roughness;
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ROUGHNESS = n_out3p0;
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_pgae6")
+nodes/fragment/2/position = Vector2(-40, 60)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatParameter_pfeii")
+nodes/fragment/3/position = Vector2(-80, 280)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 0, 0, 3)

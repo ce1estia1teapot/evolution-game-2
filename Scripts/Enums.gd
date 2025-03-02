@@ -32,4 +32,6 @@ enum ItemID {
 	TESTITEMID = 1,
 	SIMPLE_SPEAR = 2,
 	METAL_HATCHET = 3,
+	ROCK = 4,
+	CHEST = 5,
 }
