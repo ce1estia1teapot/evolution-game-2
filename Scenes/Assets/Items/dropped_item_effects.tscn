@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://rjhobf8e7yh6"]
 
-[ext_resource type="Script" path="res://Scripts/Assets/dropped_item_effects.gd" id="1_0idpd"]
+[ext_resource type="Script" uid="uid://51jaccf0w6tr" path="res://Scripts/Assets/dropped_item_effects.gd" id="1_0idpd"]
 [ext_resource type="Shader" uid="uid://hhdc1mqwp7k3" path="res://Assets/Shaders/Material Shaders/vs_item_drop_glow.tres" id="1_c7ho0"]
 [ext_resource type="Texture2D" uid="uid://cei5mwab3qqu6" path="res://Assets/Textures/NoiseTextures/tear_drop_albedo.png" id="2_nka3l"]
 [ext_resource type="PackedScene" uid="uid://dyedm17usnfd5" path="res://Scenes/TestingAssets/test_player.tscn" id="3_liu57"]
@@ -14,10 +14,10 @@
 render_priority = 0
 shader = ExtResource("1_c7ho0")
 shader_parameter/GlowColor = Color(0.03, 1, 3, 1)
+shader_parameter/GlowShape = ExtResource("2_nka3l")
 shader_parameter/BlinkRate = 5.0
 shader_parameter/MinBrightness = 0.4
 shader_parameter/MaxBrightness = 1.0
-shader_parameter/GlowShape = ExtResource("2_nka3l")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uafdv"]
 blend_mode = 1

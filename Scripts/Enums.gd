@@ -28,6 +28,18 @@ enum CameraEnum{
 	CAMERA2 = 2
 }
 
+enum StateFlags {
+	IGNORE_INPUTS = 1,
+	IGNORE_INTERACTS = 2,
+}
+
+enum CraftingBenchModes {
+	DISABLED = 1,
+	SLEEP = 2,
+	STANDBY = 3,
+	ACTIVE = 4,
+}
+
 enum ItemID {
 	TESTITEMID = 1,
 	SIMPLE_SPEAR = 2,

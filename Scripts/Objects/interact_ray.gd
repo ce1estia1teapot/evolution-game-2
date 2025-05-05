@@ -1,24 +1,23 @@
 extends RayCast3D
 class_name InteractRay
 
-@onready var n_prompt: Label = $Prompt
-
+var prompt = ""
 
 func _physics_process(delta: float) -> void:
-	n_prompt.text = ""
 	
 	if is_colliding():
 		var collider = get_collider()
 		
 		if collider is InteractComponent:
-			n_prompt.text = collider.interact_prompt
+			prompt = collider.interact_prompt
 		else:
-			n_prompt.text = collider.name
-		
+			prompt = collider.name
+	else:
+		prompt = ""
 
-func attempt_interact(p_interaction_mode: Enums.InteractionComponentMode) -> void:
+func attempt_interact(p_interaction_mode: Enums.InteractionComponentMode, p_interactor : PlayerAvatar) -> void:
 	if is_colliding():
 		var collider = get_collider()
 		
 		if collider is InteractComponent:
-			collider.interact(p_interaction_mode)
+			collider.interact(p_interaction_mode, p_interactor)

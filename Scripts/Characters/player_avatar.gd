@@ -18,6 +18,7 @@ class_name PlayerAvatar
 @onready var n_hurt_overlay : TextureRect = $PlayerInterfaceManager/HurtOverlay
 @onready var n_health_bar_hud : HealthBarHUD = $PlayerInterfaceManager/HealthBarHUD
 @onready var n_death_screen_test : Panel = $PlayerInterfaceManager/DeathScreenTest
+@onready var n_interact_prompt : Label = $PlayerInterfaceManager/InteractPrompt
 
 # Misc.
 @onready var n_collision_shape : CollisionShape3D = $CollisionShape3D
@@ -58,7 +59,7 @@ var old_vel: float = 0.0
 var m_rigid_body_mass_max: float = 1000
 
 # Flags
-var is_taking_control_input: bool = true
+var state_flags : Array[Enums.StateFlags] = []
 
 # Tweens
 
@@ -89,12 +90,17 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		m_look_rot.y -= camera_sensitivity * event.relative.x
-		m_look_rot.x -= camera_sensitivity * event.relative.y
-		m_look_rot.x = clampf(m_look_rot.x, camera_min_angle, camera_max_angle)
+	var is_ignoring_inputs = Enums.StateFlags.IGNORE_INPUTS in state_flags
 	
-	_handle_gameplay_input()
+	if is_ignoring_inputs:
+		return
+	else:
+		if event is InputEventMouseMotion:
+			m_look_rot.y -= camera_sensitivity * event.relative.x
+			m_look_rot.x -= camera_sensitivity * event.relative.y
+			m_look_rot.x = clampf(m_look_rot.x, camera_min_angle, camera_max_angle)
+		
+			_handle_gameplay_input()
 
 func _parse_world_state_dict(p_dict: Dictionary) -> void:
 	"""
@@ -124,6 +130,14 @@ func _generate_world_state_dict() -> Dictionary:
 	}
 	
 	return report_dict
+
+func _process(delta: float) -> void:
+	"""
+	1. Update player interact prompt
+	"""
+	
+	# Update player interact prompt
+	n_interact_prompt.text = n_interact_ray.prompt
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -184,7 +198,7 @@ func _handle_gameplay_input() -> void:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	elif Input.is_action_just_pressed("interact_primary"):
-		n_interact_ray.attempt_interact(Enums.InteractionComponentMode.PRIMARY)
+		n_interact_ray.attempt_interact(Enums.InteractionComponentMode.PRIMARY, self)
 
 func _update_in_world_state() -> void:
 	var update_dict: Dictionary = _generate_world_state_dict()
@@ -220,6 +234,43 @@ func fall_damage(p_damage: float) -> void:
 	# Send damage to health component
 	r_health_component.apply_damage(p_damage, Enums.DamageTypes.FALL)
 
+func take_focus() -> void:
+	"""
+	This function should be called by a crafting bench or similar that is
+	releasing the player from an interaction
+	"""
+
+func move_to_point(p_point : Vector3) -> void:
+	self.position = p_point
+
+func set_state_flag(p_flag : Enums.StateFlags, p_boolean : bool) -> void:
+	"""
+	Adds or removes the state flag from list for ignoring control inputs from player.
+	If current value matches input, nothing happens.
+	"""
+	
+	var is_flag = p_flag in state_flags
+	if p_boolean:
+		if is_flag:
+			pass
+		else:
+			state_flags.append(p_flag)
+	else:
+		if is_flag:
+			state_flags.erase(p_flag)
+		else:
+			pass
+
+func set_is_ignoring_input_events(p_boolean : bool) -> void:
+	"""
+	Adds or removes the state flag from list for ignoring control inputs from player and calls "set_process_input"
+	If current value matches input, nothing happens.
+	"""
+	
+	var ignore_input_flag = Enums.StateFlags.IGNORE_INPUTS
+	set_state_flag(ignore_input_flag, p_boolean)
+	
+	set_process_input(not p_boolean)
 #endregion
 
 
@@ -261,7 +312,7 @@ func on_health_component_health_is_zero(p_health_component: HealthComponent) -> 
 		2. Tell the interface_manager to show_death_screen()
 	"""
 	
-	is_taking_control_input = false
+	self.set_is_ignoring_input_events(true)
 	n_player_interface_manager.show_death_screen()
 
 func on_health_component_knockback_received(p_knockback_force: float) -> void:

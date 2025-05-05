@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://ctt5r6n0fug78"]
 
 [ext_resource type="Material" uid="uid://b3ff1uwfujonb" path="res://Assets/Materials/m_rock_material_1.tres" id="1_5bc3l"]
-[ext_resource type="Script" path="res://Scripts/Objects/items/rock_drop.gd" id="1_whkc7"]
+[ext_resource type="Script" uid="uid://bj4xcu0e3afs6" path="res://Scripts/Objects/items/rock_drop.gd" id="1_whkc7"]
 [ext_resource type="PackedScene" uid="uid://ct6awo8mfhcc4" path="res://Scenes/Components Scenes/interact_component.tscn" id="2_2btff"]
 [ext_resource type="Resource" uid="uid://cpan8qixa81e2" path="res://Resources/Items/rock_item_1.tres" id="2_tvh86"]
 

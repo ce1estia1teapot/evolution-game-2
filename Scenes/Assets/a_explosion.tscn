@@ -64,8 +64,7 @@ texture_mode = 1
 curve = SubResource("Curve_qb5m2")
 
 [sub_resource type="Curve" id="Curve_jficd"]
-min_value = -200.0
-max_value = 200.0
+_limits = [-200.0, 200.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -249,8 +248,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x1vph"]
 _data = {
-"Init": SubResource("Animation_2lxvt"),
-"RESET": SubResource("Animation_7fede")
+&"Init": SubResource("Animation_2lxvt"),
+&"RESET": SubResource("Animation_7fede")
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wdpva"]

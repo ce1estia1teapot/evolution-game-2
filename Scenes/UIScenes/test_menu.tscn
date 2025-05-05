@@ -1,6 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://ccraq52024wyw"]
 
-[ext_resource type="Theme" path="res://Assets/Themes(UI)/test_theme.tres" id="1_udrc2"]
+[sub_resource type="Resource" id="Resource_rld0r"]
+metadata/__load_path__ = "res://Assets/Themes(UI)/test_theme.tres"
 
 [sub_resource type="Gradient" id="Gradient_wki1f"]
 colors = PackedColorArray(0, 0, 0, 1, 0.408329, 0.408329, 0.408329, 1)
@@ -19,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_udrc2")
+theme = SubResource("Resource_rld0r")
 
 [node name="Main Menu" type="PanelContainer" parent="."]
 layout_mode = 0

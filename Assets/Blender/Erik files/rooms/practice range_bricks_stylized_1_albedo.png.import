@@ -2,14 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cohf5mgoan1s"
+uid="uid://ccjli5oyresci"
 path.s3tc="res://.godot/imported/practice range_bricks_stylized_1_albedo.png-0f62a75fe957a789842c67f3e270090b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
-}
-generator_parameters={
-"md5": "337b5f6b185420bfec76b1b7266f69df"
 }
 
 [deps]

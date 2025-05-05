@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://8o01nwkr3jje"]
 
-[ext_resource type="Script" path="res://Scripts/Control Scripts/healthbar_hud.gd" id="1_3c03j"]
+[ext_resource type="Script" uid="uid://bciuiyc7bqwh1" path="res://Scripts/Assets/Control Scripts/healthbar_hud.gd" id="1_3c03j"]
 [ext_resource type="Theme" uid="uid://l04i7nho1mgc" path="res://Assets/Themes(UI)/ui_theme_test.tres" id="2_ghla2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vfc8"]

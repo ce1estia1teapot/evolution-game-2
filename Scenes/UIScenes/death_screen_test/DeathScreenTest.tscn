@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cn2b2hmhqm1ay"]
 
 [ext_resource type="Theme" uid="uid://l04i7nho1mgc" path="res://Assets/Themes(UI)/ui_theme_test.tres" id="1_67w1f"]
-[ext_resource type="Script" path="res://Scenes/UIScenes/death_screen_test/death_screen_test.gd" id="2_6lxhq"]
+[ext_resource type="Script" uid="uid://busmu01ffi4nf" path="res://Scenes/UIScenes/death_screen_test/death_screen_test.gd" id="2_6lxhq"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gu41y"]
 font_size = 156

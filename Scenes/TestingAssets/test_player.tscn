@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://dyedm17usnfd5"]
 
 [ext_resource type="PackedScene" uid="uid://dxr3f2t3jj4kw" path="res://Scenes/Assets/Characters/HumanAnimation.glb" id="1_xgj8s"]
-[ext_resource type="Script" path="res://Scripts/Characters/test_player.gd" id="2_eudun"]
-[ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerIdleState.gd" id="4_kucbl"]
-[ext_resource type="Script" path="res://Scripts/States/PlayerStates/PlayerRunningState.gd" id="5_6g0pf"]
+[ext_resource type="Script" uid="uid://bv750p1mnuavr" path="res://Scripts/Characters/test_player.gd" id="2_eudun"]
+[ext_resource type="Script" uid="uid://6vxv8yabrkq2" path="res://Scripts/States/PlayerStates/PlayerIdleState.gd" id="4_kucbl"]
+[ext_resource type="Script" uid="uid://bcb7eviicfj5" path="res://Scripts/States/PlayerStates/PlayerRunningState.gd" id="5_6g0pf"]
 [ext_resource type="PackedScene" uid="uid://dyokuwp52rmme" path="res://Scenes/Assets/Items/Weapons/metal_hatchet/metal_hatchet.tscn" id="10_haeml"]
-[ext_resource type="Script" path="res://Scripts/States/player_state_machine.gd" id="10_ue243"]
+[ext_resource type="Script" uid="uid://d22rowlo7deyj" path="res://Scripts/States/player_state_machine.gd" id="10_ue243"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vy1d"]
 radius = 0.501737

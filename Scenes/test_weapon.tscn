@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://cpca20n8t25tm"]
 
-[ext_resource type="Script" path="res://Scripts/Objects/test_weapon.gd" id="1_n7vpp"]
+[sub_resource type="Resource" id="Resource_eg3m6"]
+metadata/__load_path__ = "res://Scripts/Objects/test_weapon.gd"
 
 [node name="StaticBody3D" type="StaticBody3D"]
-script = ExtResource("1_n7vpp")
+script = SubResource("Resource_eg3m6")
 
 [node name="Area3D" type="Area3D" parent="."]

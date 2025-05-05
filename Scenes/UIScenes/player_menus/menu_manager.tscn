@@ -1,0 +1,159 @@
+[gd_scene load_steps=4 format=3 uid="uid://3phwvubm43mk"]
+
+[ext_resource type="Theme" uid="uid://xqr8biecbjfe" path="res://Assets/Themes(UI)/base_menu_theme.tres" id="1_5jn71"]
+[ext_resource type="Script" uid="uid://dau4xc3fgpeim" path="res://Scripts/UI/menu_manager.gd" id="1_gpcdx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hwaj2"]
+font_size = 47
+
+[node name="MenuManager" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gpcdx")
+
+[node name="MainMenu" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -329.5
+offset_top = -329.5
+offset_right = 329.5
+offset_bottom = 329.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_5jn71")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="MainMenu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Factory Game"
+label_settings = SubResource("LabelSettings_hwaj2")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(468.86, 37.94)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ContinueButton" type="Button" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(309, 94)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_5jn71")
+theme_override_font_sizes/font_size = 37
+keep_pressed_outside = true
+text = "Continue"
+
+[node name="PlayButton" type="Button" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(309, 94)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_5jn71")
+theme_override_font_sizes/font_size = 37
+keep_pressed_outside = true
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(309, 94)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_5jn71")
+theme_override_font_sizes/font_size = 37
+keep_pressed_outside = true
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MainMenu/VBoxContainer"]
+custom_minimum_size = Vector2(309, 94)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_5jn71")
+theme_override_font_sizes/font_size = 37
+keep_pressed_outside = true
+text = "Quit"
+
+[node name="PauseMenu" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -329.5
+offset_top = -329.5
+offset_right = 329.5
+offset_bottom = 329.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PauseLabel" type="Label" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "paused"
+label_settings = SubResource("LabelSettings_hwaj2")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(468.86, 37.94)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="ResumeButton" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(309, 94)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_5jn71")
+theme_override_font_sizes/font_size = 37
+keep_pressed_outside = true
+text = "Resume"
+
+[node name="OptionsButton" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(309, 94)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_5jn71")
+theme_override_font_sizes/font_size = 37
+keep_pressed_outside = true
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(309, 94)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_5jn71")
+theme_override_font_sizes/font_size = 37
+keep_pressed_outside = true
+text = "Quit"

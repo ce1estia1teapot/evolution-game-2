@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://xqr8biecbjfe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b851n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ylpkm"]
+
+[resource]
+Button/font_sizes/font_size = 15
+Button/styles/focus = SubResource("StyleBoxEmpty_b851n")
+Panel/styles/panel = SubResource("StyleBoxEmpty_ylpkm")

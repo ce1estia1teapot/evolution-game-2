@@ -46,8 +46,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qtgc0"]
 _data = {
-"RESET": SubResource("Animation_l4fa3"),
-"float": SubResource("Animation_rxr78")
+&"RESET": SubResource("Animation_l4fa3"),
+&"float": SubResource("Animation_rxr78")
 }
 
 [node name="DroppedPlank" type="Node3D"]
