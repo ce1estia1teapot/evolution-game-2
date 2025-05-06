@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://bv0w1qjysakw7"]
+[gd_scene load_steps=17 format=3 uid="uid://bv0w1qjysakw7"]
 
 [ext_resource type="Script" uid="uid://ccerjox5tgets" path="res://Scripts/Assets/Structures/Crafting/basic_crafting_bench_1.gd" id="1_o3e5b"]
 [ext_resource type="PackedScene" uid="uid://ct6awo8mfhcc4" path="res://Scenes/Components Scenes/interact_component.tscn" id="2_gecmb"]
+[ext_resource type="PackedScene" uid="uid://rj5hrcahpmu7" path="res://Scenes/TestingAssets/ball_test.tscn" id="2_j8vc1"]
 [ext_resource type="PackedScene" uid="uid://b4m31vcs1k7re" path="res://Scenes/Components Scenes/inventory_component.tscn" id="3_j8vc1"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_m4mep"]
@@ -42,13 +43,13 @@ size = Vector3(0.0609131, 0.286015, 0.36615)
 
 [node name="BasicCraftingBenchTest1" type="Node3D"]
 script = ExtResource("1_o3e5b")
-conveyor_item_speed_mps = null
+spawn_scene = ExtResource("2_j8vc1")
 
 [node name="BenchCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109548, 0.810223, 0.743267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0395296, 0.81909, 0.566826)
 keep_aspect = 0
 attributes = SubResource("CameraAttributesPractical_m4mep")
-fov = 108.13
+fov = 123.274
 
 [node name="Meshes" type="Node3D" parent="."]
 
@@ -101,6 +102,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.876437, 0.745585)
 
 [node name="ConveyorPlaceholder" type="CSGBox3D" parent="Tools/Conveyor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.637512, 0.0795134)
+use_collision = true
+collision_layer = 8
 size = Vector3(1, 0.0449524, 0.325928)
 material = SubResource("StandardMaterial3D_vdohp")
 
@@ -174,13 +177,10 @@ polygon = PackedVector2Array(0.423383, 0.764556, 0.355603, 0.808002, 0.566113, 0
 depth = 0.4
 
 [node name="HopperSpawnArea" type="Area3D" parent="Tools/Hopper"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.545355, 0.733671, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38664, 0.774218, 0.0828962)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tools/Hopper/HopperSpawnArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.163605, 0.0198799, 0.0887604)
 shape = SubResource("BoxShape3D_xwujn")
-
-[node name="Spawnables" type="Node3D" parent="Tools/Hopper"]
 
 [node name="FinishBin" type="Node3D" parent="Tools"]
 
@@ -211,3 +211,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.318782, 0.651771, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Tools/FinishBin/FinishBinArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.134806, 0.0647053, 0.078949)
 shape = SubResource("BoxShape3D_7ycn6")
+
+[node name="NodeHolders" type="Node" parent="."]
+
+[node name="TimersHolder" type="Node" parent="NodeHolders"]
+
+[node name="SpawnerTimer" type="Timer" parent="NodeHolders/TimersHolder"]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+
+[node name="QuitTimer" type="Timer" parent="NodeHolders/TimersHolder"]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+ignore_time_scale = true
+
+[node name="ActionNumTimer" type="Timer" parent="NodeHolders/TimersHolder"]
+process_callback = 0
+wait_time = 0.5
+one_shot = true
+ignore_time_scale = true
+
+[node name="SpawnablesHolder" type="Node" parent="NodeHolders"]

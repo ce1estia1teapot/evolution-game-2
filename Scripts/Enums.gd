@@ -40,6 +40,13 @@ enum CraftingBenchModes {
 	ACTIVE = 4,
 }
 
+enum LogCategories {
+	ERROR = 0,
+	WARNING = 1,
+	INFO = 2,
+	DEBUG = 3,
+}
+
 enum ItemID {
 	TESTITEMID = 1,
 	SIMPLE_SPEAR = 2,

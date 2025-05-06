@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Evolution Game"
-run/main_scene="res://Scenes/sandbox_level.tscn"
+run/main_scene="uid://bv0w1qjysakw7"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [autoload]
@@ -22,16 +22,17 @@ PlayerSignalBus="*res://Scripts/Signals/PlayerSignalBus.gd"
 DamageNumbers="*res://Scripts/Singletons/DamageNumbers.gd"
 WorldState="*res://Scripts/WorldState.gd"
 InterfaceSignalBus="*res://Scripts/Signals/InterfaceSignalBus.gd"
+Log="*res://addons/GoLogger/Log.tscn"
 
 [display]
 
-window/size/viewport_width=2160
-window/size/viewport_height=1440
-window/size/mode=3
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/globalize-plugins/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/globalize-plugins/plugin.cfg", "res://addons/script-ide/plugin.cfg", "res://addons/terrain_3d/plugin.cfg")
 
 [file_customization]
 
